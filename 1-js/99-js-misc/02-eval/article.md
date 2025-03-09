@@ -54,7 +54,7 @@ eval("x = 10");
 alert(x); // 10, hodnota změněna
 ```
 
-Ve striktním režimu má `eval` své vlastní lexikální prostředí, takže funkce a proměnné deklarované uvnitř `eval` nejsou viditelné venku:
+Ve striktním režimu má `eval` své vlastní lexikální prostředí, takže funkce a proměnné deklarované uvnitř `eval` nejsou viditelné zvenčí:
 
 ```js untrusted refresh run
 // pamatujte: 'use strict' je ve spustitelných příkladech standardně zapnuté
@@ -69,15 +69,15 @@ Bez `use strict` nemá `eval` své vlastní lexikální prostředí, takže bych
 
 ## Použití „eval“
 
-V moderním programování se `eval` používá velmi vzácně. Často se říká, že „eval je zlo“ *(anglicky „eval is evil“ -- pozn. překl.)*.
+V moderním programování se `eval` používá velmi vzácně. Často se říká, že „eval je zlo“ (anglicky „eval is evil“).
 
-Důvod je jednoduchý: před dávnými, dávnými časy býval JavaScript mnohem slabší jazyk a mnoho věcí bylo možné provést jedině pomocí `eval`. Ale tahle doba pominula už před deseti lety.
+Důvod je jednoduchý: před dávnými, dávnými časy byl JavaScript mnohem slabší jazyk a mnoho věcí bylo možné provést jedině pomocí `eval`. Ale tahle doba pominula už před deseti lety.
 
-V současnosti není téměř žádný důvod, proč `eval` používat. Pokud ho někdo používá, je velká šance, že se dá nahradit nějakou moderní jazykovou konstrukcí nebo [JavaScriptovým modulem](info:modules).
+V současnosti není téměř žádný důvod, proč `eval` používat. Pokud ho někdo používá, je velká šance, že ho lze nahradit nějakým moderním jazykovým konstruktem nebo [JavaScriptovým modulem](info:modules).
 
 Prosíme všimněte si, že jeho schopnost přistupovat k vnějším proměnným má vedlejší efekty.
 
-Minifikátory kódu (nástroje používané před odesláním JS do produkce, aby jej zkomprimovaly) přejmenovávají lokální proměnné na kratší (např. `a`, `b` atd.), aby kód zkrátily. To je obvykle bezpečné, ale při použití `eval` ne, protože vyhodnocovaný řetězec kódu může k lokálním proměnným přistupovat. Minifikátory tedy toto přejmenování neprovádějí u proměnných, které mohou být viditelné z `eval`. To negativně ovlivňuje poměr komprese kódu.
+Minifikátory kódu (nástroje používané před odesláním JS do produkce, aby jej zkomprimovaly) přejmenovávají lokální proměnné na kratší (např. `a`, `b` atd.), aby kód zkrátily. To je obvykle bezpečné, ale při použití `eval` ne, protože vyhodnocovaný řetězec kódu může k lokálním proměnným přistupovat. Minifikátory tedy u proměnných, které mohou být viditelné z `eval`, toto přejmenování neprovádějí. To negativně ovlivňuje poměr komprese kódu.
 
 Rovněž používání vnějších lokálních proměnných uvnitř `eval` se považuje za špatnou programátorskou praktiku, protože ztěžuje údržbu kódu.
 
@@ -103,12 +103,12 @@ let f = new Function('a', 'alert(a)');
 f(5); // 5
 ```
 
-Konstrukce `new Function` je vysvětlena v kapitole <info:new-function>. Vytvoří funkci z řetězce, rovněž v globálním rozsahu platnosti. Funkce tedy neuvidí lokální proměnné. Je však mnohem čistší předat je explicitně jako argumenty, tak jako v uvedeném příkladu.
+Konstrukt `new Function` je vysvětlen v kapitole <info:new-function>. Vytvoří funkci z řetězce, rovněž v globálním rozsahu platnosti. Funkce tedy neuvidí lokální proměnné. Je však mnohem čistší předat je explicitně jako argumenty, tak jako v uvedeném příkladu.
 
 ## Shrnutí
 
 Volání `eval(kód)` spustí řetězec kódu a vrátí výsledek posledního příkazu.
 - V moderním JavaScriptu se používá málokdy, jelikož obvykle není zapotřebí.
 - Může přistupovat k vnějším lokálním proměnným. To se považuje za špatnou praktiku.
-- Místo toho k vyhodnocení kódu v globálním rozsahu platnosti použijte `window.eval(kód)`.
+- K vyhodnocení kódu v globálním rozsahu platnosti místo něj použijte `window.eval(kód)`.
 - Nebo, jestliže váš kód potřebuje data z vnějšího rozsahu, použijte `new Function` a předejte je jako argumenty.

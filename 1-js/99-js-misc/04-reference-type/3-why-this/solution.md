@@ -16,7 +16,7 @@ Zde je vysvětlení.
 
 4. Podobně jako `(3)`, nalevo od závorek `()` máme výraz.
 
-Abychom vysvětlili chování `(3)` a `(4)`, musíme si vzpomenout, že accessory vlastností (tečka nebo hranaté závorky) vracejí hodnotu referenčního typu.
+Abychom vysvětlili chování `(3)` a `(4)`, musíme si vzpomenout, že operátory přístupu k vlastnostem (tečka nebo hranaté závorky) vracejí hodnotu referenčního typu.
 
 Jakákoli operace na ní kromě volání metody (např. přiřazení `=`, nebo `||`) ji změní na obyčejnou hodnotu, která neobsahuje informaci umožňující nastavit `this`.
 

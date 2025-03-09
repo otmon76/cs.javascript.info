@@ -11,7 +11,7 @@ let uživatel = {
 (uživatel.jdi)() // chyba!
 ```
 
-Chybová zpráva ve většině prohlížečů nám nedává mnoho informací o tom, co bylo špatně.
+Ve většině prohlížečů nám chybová zpráva nedává mnoho informací o tom, co bylo špatně.
 
 **Chyba se objevila proto, že za `uživatel = {...}` chybí středník.**
 
