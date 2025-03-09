@@ -71,8 +71,7 @@ if (!Math.trunc) { // není-li taková funkce
 
 JavaScript je vysoce dynamický jazyk. Skripty mohou přidávat nebo modifikovat libovolné funkce, dokonce i vestavěné.
 
-Dvě zajímavé knihovny polyfillů jsou:
-- [core js](https://github.com/zloirock/core-js), která toho podporuje mnoho a umožňuje přidávat jen potřebné vlastnosti.
+Zajímavá knihovna polyfillů je [core js](https://github.com/zloirock/core-js), která podporuje širokou škálu vlastností a umožňuje vám přidat jen ty, které potřebujete.
 
 ## Shrnutí
 
