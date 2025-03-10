@@ -1,10 +1,10 @@
-# BigInt
+# Typ BigInt
 
 [recent caniuse="bigint"]
 
 `BigInt` je speciální číselný typ, který poskytuje podporu celých čísel libovolné délky.
 
-Číslo typu BigInt se vytvoří přidáním písmene `n` na konec celočíselného literálu nebo voláním funkce `BigInt`, která vytváří biginty z řetězců, čísel apod.
+Číslo typu BigInt se vytvoří přidáním písmene `n` na konec celočíselného literálu nebo voláním funkce `BigInt`, která vytváří biginty z řetězců, čísel a podobně.
 
 ```js
 const bigint = 1234567890123456789012345678901234567890n;
@@ -32,7 +32,7 @@ Nemůžeme směšovat biginty a běžná čísla:
 alert(1n + 2); // Chyba: Nelze míchat dohromady BigInt a jiné typy
 ```
 
-Když je potřeba, měli bychom je explicitně konvertovat: použitím buď `BigInt()`, nebo `Number()`, například:
+Když je potřeba, měli bychom je explicitně konvertovat použitím buď `BigInt()`, nebo `Number()`, například:
 
 ```js run
 let bigint = 1n;
@@ -99,7 +99,7 @@ alert( 0n || 2 ); // 2 (0n se považuje za nepravdivé)
 
 ## Polyfilly
 
-Polyfillování bigintů je problematické. Příčinou je, že mnoho JavaScriptových operátorů, např. `+`, `-` a podobně, se chová na bigintech jinak oproti běžným číslům.
+Polyfillování bigintů je problematické. Příčinou je, že mnoho JavaScriptových operátorů, např. `+`, `-` a podobně, se chová na bigintech odlišně oproti běžným číslům.
 
 Například dělení bigintů vrátí vždy bigint (zaokrouhlený, je-li to nutné).
 
@@ -107,7 +107,7 @@ Aby polyfill mohl takové chování emulovat, musel by analyzovat kód a nahradi
 
 Dosud tedy není dobře znám žádný dobrý polyfill.
 
-Jinou cestičku kolem ovšem nabízejí vývojáři knihovny [JSBI](https://github.com/GoogleChromeLabs/jsbi).
+Jinou cestičku kolem bigintů však nabízejí vývojáři knihovny [JSBI](https://github.com/GoogleChromeLabs/jsbi).
 
 Tato knihovna implementuje velká čísla svými vlastními metodami. Můžeme je používat místo nativních bigintů:
 
@@ -118,11 +118,11 @@ Tato knihovna implementuje velká čísla svými vlastními metodami. Můžeme j
 | Odčítání	| `c = a - b` | `c = JSBI.subtract(a, b)` |
 | ... | ... | ... |
 
-...A pak použít polyfill (plugin Babel) ke konverzi volání JSBI na nativní biginty pro prohlížeče, které je podporují.
+...A pak použít polyfill (zásuvný modul Babel) ke konverzi volání JSBI na nativní biginty pro prohlížeče, které je podporují.
 
-Jinými slovy, tento přístup nám navrhuje, abychom místo používání nativních bigintů psali kód v JSBI. Avšak JSBI interně pracuje s čísly jako s biginty a emuluje je způsobem blízkým specifikaci, takže kód bude „připraven pro biginty“.
+Jinými slovy, tento přístup nám navrhuje, abychom místo používání nativních bigintů psali kód v JSBI. Avšak JSBI vnitřně pracuje s čísly jako s biginty a emuluje je způsobem blízkým specifikaci, takže kód bude „připraven pro biginty“.
 
-Takový kód s JSBI můžeme používat „tak, jak je“ na enginech, které biginty nepodporují, i na těch, které ano -- polyfill bude konvertovat volání na nativní biginty.
+Takový kód s JSBI můžeme používat beze změny na motorech, které biginty nepodporují, i na těch, které je podporují -- polyfill bude konvertovat volání na nativní biginty.
 
 ## Odkazy
 
