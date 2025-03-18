@@ -690,3 +690,6 @@ promise-then-chain.svg:
   
 promise-then-many.svg:
   'resolve(1)': 'splň(1)'
+
+weakref-finalizationregistry-01.svg:
+  'user': 'uživatel'
