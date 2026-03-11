@@ -18,11 +18,11 @@ Když byl JavaScript vytvořen, jmenoval se původně jinak: „LiveScript“. A
 Postupně při vývoji se však JavaScript stal zcela nezávislým jazykem se svou vlastní specifikací nazvanou [ECMAScript](http://cs.wikipedia.org/wiki/ECMAScript) a nyní nemá k Javě vůbec žádný vztah.
 ```
 
-Dnes je možné spouštět JavaScript nejen v prohlížeči, ale i na serveru nebo na kterémkoli zařízení, které obsahuje zvláštní program nazvaný [JavaScriptový engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Dnes je možné spouštět JavaScript nejen v prohlížeči, ale i na serveru nebo na kterémkoli zařízení, které obsahuje zvláštní program nazvaný [JavaScriptový motor](https://en.wikipedia.org/wiki/JavaScript_engine).
 
-Prohlížeč má zabudovaný engine, který se někdy nazývá „virtuální stroj JavaScriptu“.
+Prohlížeč má zabudovaný motor (anglicky *engine*), který se někdy nazývá „virtuální stroj JavaScriptu“.
 
-Různé enginy mají různá „kódová označení“. Například:
+Různé motory mají různá „kódová označení“. Například:
 
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- v Chrome, Opeře a Edge.
 - [SpiderMonkey](https://cs.wikipedia.org/wiki/SpiderMonkey) -- ve Firefoxu.
@@ -30,15 +30,15 @@ Různé enginy mají různá „kódová označení“. Například:
 
 Výše uvedené pojmy je dobré si pamatovat, protože se používají ve vývojářských článcích na internetu. Budeme je používat i my. Například je-li uvedeno „vlastnost X je podporována ve V8“, znamená to, že pravděpodobně bude fungovat v Chrome, Opeře a Edge.
 
-```smart header="Jak enginy fungují?"
+```smart header="Jak motory fungují?"
 
-Enginy jsou složité, ale jejich základy jsou jednoduché.
+Motory jsou složité, ale jejich základy jsou jednoduché.
 
-1. Engine (v případě prohlížeče zahrnutý do něj) načte („rozebere“, „parsuje“) skript.
+1. Motor (v případě prohlížeče zahrnutý do něj) načte („rozebere“, „parsuje“) skript.
 2. Pak přeloží („zkompiluje“) skript do strojového kódu.
 3. A pak se strojový kód hezky rychle spustí.
 
-Při každém kroku procesu engine aplikuje optimalizace. Dokonce sleduje, jak zkompilovaný skript běží, analyzuje data, která jím protékají, a podle těchto znalostí dále optimalizuje strojový kód.
+Při každém kroku procesu motor aplikuje optimalizace. Dokonce sleduje, jak zkompilovaný skript běží, analyzuje data, která jím protékají, a podle těchto znalostí dále optimalizuje strojový kód.
 ```
 
 ## Co může JavaScript v prohlížeči dělat?
@@ -109,7 +109,7 @@ Příklady takových jazyků:
 - [CoffeeScript](https://coffeescript.org/) je „syntaktický cukr“ pro JavaScript, který zavádí kratší syntaxi a tím nám umožňuje psát čistší a přesnější kód. Obvykle jej mají v oblibě vývojáři, kteří používají jazyk Ruby.
 - [TypeScript](https://www.typescriptlang.org/) se soustředí na přidání „striktního, silně typovaného systému“, aby zjednodušil vývoj a podporu složitých systémů. Vyvinula jej firma Microsoft.
 - [Flow](https://flow.org/) rovněž přidává typovací systém, ale jiným způsobem. Vyvinul jej Facebook.
-- [Dart](https://www.dartlang.org/) je samostatný jazyk se svým vlastním enginem, který běží v prostředích mimo prohlížeč (např. v mobilních aplikacích), ale i ten může být transpilován do JavaScriptu. Vyvinut firmou Google.
+- [Dart](https://www.dartlang.org/) je samostatný jazyk se svým vlastním motorem, který běží v prostředích mimo prohlížeč (např. v mobilních aplikacích), ale i ten může být transpilován do JavaScriptu. Vyvinut firmou Google.
 - [Brython](https://brython.info/) je transpiler Pythonu do JavaScriptu, který umožňuje psát aplikace v čistém Pythonu bez JavaScriptu.
 - [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) je moderní, stručný a bezpečný programovací jazyk, jehož cílem může být prohlížeč nebo Node.
 

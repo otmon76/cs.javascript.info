@@ -217,7 +217,7 @@ A zde je obrázek pro vnořený `setTimeout`:
 
 ![](settimeout-interval.svg)
 
-**Vnořený `setTimeout` zaručuje pevnou prodlevu (zde 100 ms).**
+**Vnořený `setTimeout` zaručuje pevnou prodlevu (zde 100 ms) před koncem jednoho volání a začátkem následujícího.**
 
 Je to proto, že nové volání je naplánováno na konci předchozího.
 
