@@ -704,3 +704,9 @@ metric-client-width-nopadding.svg:
 ball_shift.svg:
   'shiftX': 'posunX'
   'shiftY': 'posunY'
+  
+8bit-integer-257.svg:
+  '8-bit integer': '8-bitové číslo'
+
+8bit-integer-256.svg:
+  '8-bit integer': '8-bitové číslo'
