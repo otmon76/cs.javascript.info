@@ -146,9 +146,9 @@ xhr-another-domain.svg:
   Server: 'Server'
   HTTP-request: 'HTTP požadavek'
   HTTP-response: 'HTTP odpověď'
-  '* OR https://javascript.info': '* NEBO https://javascript.info'
-  'if the header allows, then success,': 'pokud to hlavička umožní, pak úspěch,'
-  otherwise fail: 'jinak chyba'
+  "(or https://javascript.info)": '(nebo https://javascript.info)'
+  "if the header allows, then success,": 'pokud to hlavička umožní, pak úspěch,'
+  "otherwise fail": 'jinak chyba'
 
 xhr-preflight.svg:
   _defaults:
@@ -158,8 +158,6 @@ xhr-preflight.svg:
   otherwise error: 'jinak chyba'
   'if allowed: success,': 'je-li povoleno, úspěch,'
   Main HTTP-request: 'Hlavní HTTP požadavek'
-  preflight:
-    text: 'předlet'
   if allowed:
     text: 'je-li povoleno'
 
