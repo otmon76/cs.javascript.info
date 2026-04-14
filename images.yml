@@ -173,7 +173,7 @@ websocket-handshake.svg:
   HTTP-request: 'HTTP požadavek'
   '"Hey, server, let''s talk WebSocket?"': '„Servere, popovídáme si na WebSocketu?“'
   HTTP-response: 'HTTP odpověď'
-  '"Okay!"': 'Dobře!'
+  '"Okay!"': '„Dobře!“'
   WebSocket protocol: 'Protokol WebSocket'
 
 long-polling.svg:

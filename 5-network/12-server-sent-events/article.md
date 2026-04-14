@@ -16,9 +16,9 @@ Je tady však několik důležitých rozdílů:
 
 Proč by ho tedy někdo měl používat?
 
-Hlavním důvodem je, že je jednodušší. Pro mnoho aplikací je síla `WebSocket` příliš velká.
+Hlavním důvodem je, že je jednodušší. Pro mnoho aplikací je `WebSocket` příliš silný.
 
-Když potřebujeme přijímat tok dat ze serveru: třeba zprávy z chatu, ceny na trhu nebo cokoli jiného, hodí se k tomu `EventSource`. Navíc podporuje obnovu spojení, což při použití `WebSocket` musíme implementovat ručně. Kromě toho je to starý planý HTTP, není to nový protokol.
+Když potřebujeme přijímat tok dat ze serveru, třeba zprávy z chatu, ceny z trhu nebo cokoli jiného, hodí se k tomu `EventSource`. Navíc podporuje obnovu spojení, což při použití `WebSocket` musíme implementovat ručně. Kromě toho je to starý planý HTTP, není to nový protokol.
 
 ## Příjem zpráv
 
@@ -58,7 +58,7 @@ let eventSource = new EventSource("/events/subscribe");
 
 eventSource.onmessage = function(událost) {
   console.log("Nová zpráva", událost.data);
-  // pro výše uvedený datový proud bude logovat 3krát
+  // pro tok dat uvedený v příkladu bude logovat 3krát
 };
 
 // nebo eventSource.addEventListener('message', ...)
@@ -66,7 +66,7 @@ eventSource.onmessage = function(událost) {
 
 ### Požadavky jiného původu
 
-`EventSource` podporuje požadavky jiného původu, stejně jako `fetch` a jiné metody pro práci se sítí. Můžeme použít jakoukoli URL:
+`EventSource` podporuje požadavky jiného původu, stejně jako `fetch` a ostatní metody pro práci se sítí. Můžeme použít jakoukoli URL:
 
 ```js
 let zdroj = new EventSource("https://another-site.com/events");
@@ -74,7 +74,7 @@ let zdroj = new EventSource("https://another-site.com/events");
 
 Vzdálený server obdrží hlavičku `Origin` a musí odpovědět hlavičkou `Access-Control-Allow-Origin`, aby bylo možné pokračovat.
 
-Když chceme předat přihlašovací údaje, měli bychom nastavit možnost `withCredentials`, například:
+Když chceme předat přihlašovací údaje, měli bychom nastavit volbu `withCredentials`, například:
 
 ```js
 let zdroj = new EventSource("https://another-site.com/events", {
@@ -91,7 +91,7 @@ Po vytvoření se `new EventSource` připojí k serveru. Pokud bude spojení př
 
 To je velmi praktické, protože se o to nemusíme starat.
 
-Mezi znovupřipojeními nastává krátká prodleva, standardně několik sekund.
+Mezi opětovnými připojeními nastává krátká prodleva, standardně několik sekund.
 
 Server může nastavit doporučenou prodlevu řádkem `retry:` v odpovědi (v milisekundách):
 
@@ -102,9 +102,9 @@ data: Ahoj, nastavuji prodlevu obnovy spojení na 15 sekund
 
 Řádek `retry:` může přijít společně s daty nebo jako samostatná zpráva.
 
-Prohlížeč by měl před obnovou spojení počkat uvedený čas v milisekundách. Může počkat i déle, např. pokud ví (od operačního systému), že momentálně není síťové připojení k dispozici, může počkat, než se objeví, a pak se zkusit připojit.
+Prohlížeč by měl před obnovou spojení počkat uvedený čas v milisekundách. Může počkat i déle, např. pokud ví (od operačního systému), že momentálně není síťové připojení dostupné, může počkat, než se objeví, a pak se zkusit připojit.
 
-- Pokud server chce, aby prohlížeč zastavil obnovu připojení, měl by odpovědět HTTP statusem 204.
+- Pokud server chce, aby prohlížeč přestal obnovovat spojení, měl by odpovědět HTTP statusem 204.
 - Pokud prohlížeč chce uzavřít spojení, měl by volat `eventSource.close()`:
 
 ```js
@@ -113,7 +113,7 @@ let eventSource = new EventSource(...);
 eventSource.close();
 ```
 
-K obnově připojení nedojde ani tehdy, pokud odpověď obsahuje nekorektní `Content-Type` nebo obsahuje jiný HTTP status než 301, 307, 200 a 204. V takových případech bude vyvolána událost `"error"` a prohlížeč se znovu nepřipojí.
+K obnově připojení navíc nedojde tehdy, pokud odpověď obsahuje nekorektní `Content-Type` nebo obsahuje jiný HTTP status než 301, 307, 200 nebo 204. V takových případech bude vyvolána událost `"error"` a prohlížeč se znovu nepřipojí.
 
 ```smart
 Když je spojení definitivně uzavřeno, není možné je nijak „znovuotevřít“. Jestliže se chceme připojit znovu, musíme vytvořit nový `EventSource`.
@@ -227,7 +227,7 @@ Jeho syntaxe je:
 let zdroj = new EventSource(url, [přihlašovacíÚdaje]);
 ```
 
-Druhý argument má jen jednu možnost: `{ withCredentials: true }`, která umožňuje posílat přihlašovací údaje na jiný původ.
+Druhý argument má jen jednu volbu: `{ withCredentials: true }`, která umožňuje posílat přihlašovací údaje na jiný původ.
 
 Celkově je zabezpečení pro jiný původ stejné jako u `fetch` a jiných síťových metod.
 
@@ -263,9 +263,9 @@ Server posílá zprávy oddělené `\n\n`.
 
 Zpráva může obsahovat následující pole:
 
-- `data:` -- tělo zprávy, posloupnost více `data` se interpretuje jako jedna zpráva s `\n` mezi svými částmi.
+- `data:` -- tělo zprávy, posloupnost více `data` se interpretuje jako jedna zpráva s částmi oddělenými `\n`.
 - `id:` -- aktualizuje `lastEventId`, při obnově spojení se posílá v `Last-Event-ID`.
-- `retry:` -- doporučuje délku prodlevy před pokusem o obnovu spojení v milisekundách. V JavaScriptu ji nelze nijak nastavit.
+- `retry:` -- doporučuje délku prodlevy v milisekundách před pokusem o obnovu spojení. V JavaScriptu ji nelze nijak nastavit.
 - `event:` -- název události, musí být před `data:`.
 
 Zpráva může obsahovat jedno nebo více polí v libovolném pořadí, ale `id:` je zpravidla poslední.

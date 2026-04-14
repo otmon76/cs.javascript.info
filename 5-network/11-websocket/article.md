@@ -66,7 +66,7 @@ Uvidíte tedy události `open` -> `message` -> `close`.
 
 To je v zásadě všechno, nyní můžeme komunikovat WebSocketem. Docela jednoduché, že?
 
-Nyní si o tom promluvme do větší hloubky.
+Nyní si o tom promluvme podrobněji.
 
 ## Otevření websocketu
 
@@ -94,8 +94,8 @@ Sec-WebSocket-Version: 13
 - `Sec-WebSocket-Key` -- náhodný klíč generovaný prohlížečem, používaný k ujištění, že server podporuje protokol WebSocket. Je náhodný, aby si proxy servery následnou komunikaci neukládaly do mezipaměti.
 - `Sec-WebSocket-Version` -- verze protokolu WebSocket, aktuální je 13.
 
-```smart header="Potřesení rukou přes WebSocket nelze emulovat"
-K vytvoření HTTP požadavku tohoto druhu nemůžeme použít `XMLHttpRequest` nebo `fetch`, protože JavaScript nemá dovoleno tyto hlavičky nastavovat.
+```smart header="Podání rukou pro WebSocket nelze emulovat"
+HTTP požadavek tohoto druhu nemůžeme vytvořit pomocí `XMLHttpRequest` nebo `fetch`, protože JavaScript nemá dovoleno tyto hlavičky nastavovat.
 ```
 
 Jestliže server souhlasí s přepnutím na WebSocket, měl by poslat odpověď s kódem 101:
@@ -167,7 +167,7 @@ Komunikace WebSocketem se skládá z „rámců“ -- fragmentů dat, které moh
 - „textové rámce“ -- obsahují textová data, která si strany navzájem posílají.
 - „binární rámce“ -- obsahují binární data, která si strany navzájem posílají.
 - „ping-pongové rámce“ se používají ke kontrole spojení, posílá je server a prohlížeč na ně automaticky odpovídá.
-- existují i „rámce uzavření spojení“ a několik dalších servisních rámců.
+- existují i „uzavírací rámce“ a několik dalších servisních rámců.
 
 V prohlížeči přímo pracujeme jen s textovými a binárními rámci.
 
@@ -179,7 +179,7 @@ Volání `socket.send(tělo)` umožňuje, aby `tělo` byl řetězec nebo binárn
 
 To se nastavuje vlastností `socket.binaryType`. Standardně je `"blob"`, takže binární data přicházejí jako objekty `Blob`.
 
-[Blob](info:blob) je binární objekt vysoké úrovně. Je přímo integrován s `<a>`, `<img>` a jinými značkami, proto je to rozumný standard. Pro binární zpracování a přístup k jednotlivých bytům dat však můžeme změnit formát na `"arraybuffer"`:
+[Blob](info:blob) je binární objekt vysoké úrovně. Je přímo integrován s `<a>`, `<img>` a jinými značkami, proto je to rozumný standard. Pro binární zpracování a přístup k jednotlivým bytům dat však můžeme změnit formát na `"arraybuffer"`:
 
 ```js
 socket.binaryType = "arraybuffer";
@@ -199,8 +199,8 @@ Vlastnost `socket.bufferedAmount` sděluje, kolik bytů zůstává v této chví
 Jejím prozkoumáním můžeme zjistit, zda je socket právě dostupný pro přenos dat.
 
 ```js
-// každých 100 ms prozkoumáme socket
-// a pošleme další data, teprve až budou všechna existující data odeslána
+// každých 100 ms prozkoumáme socket a další data pošleme
+// teprve tehdy, až budou všechna existující data odeslána
 setInterval(() => {
   if (socket.bufferedAmount == 0) {
     socket.send(dalšíData());
@@ -211,7 +211,7 @@ setInterval(() => {
 
 ## Uzavření spojení
 
-Běžně, když chce některá strana uzavřít spojení (prohlížeč i server mají stejná práva), pošle „rámec uzavření spojení“ s číselným kódem a textovým důvodem.
+Běžně, když chce některá strana uzavřít spojení (prohlížeč i server mají stejná práva), pošle „uzavírací rámec“ s číselným kódem a textovým odůvodněním.
 
 K tomu slouží metoda:
 ```js
@@ -290,7 +290,7 @@ HTML: potřebujeme `<form>` k posílání zpráv a `<div>` pro přicházející 
 
 Od JavaScriptu chceme tři věci:
 1. Otevřít spojení.
-2. Při odeslání formuláře zavolat `socket.send(zpráva)` pro odesílanou zprávu.
+2. Při odeslání formuláře zavolat `socket.send(zpráva)` s odesílanou zprávou.   
 3. Při příchodu zprávy ji připojit k `div#zprávy`.
 
 Zde je kód:
@@ -321,7 +321,7 @@ Kód na straně serveru je poněkud mimo náš rámec. Zde používáme Node.js,
 Algoritmus na straně serveru bude:
 
 1. Vytvoříme `klienti = new Set()` -- množina socketů.
-2. Každý přijatý websocket přidáme do množiny `klienti.add(socket)` a nastavíme posluchače události `message`, aby přijímal zprávy.
+2. Každý přijatý websocket přidáme do množiny `klienti.add(socket)` a nastavíme posluchače události `message`, aby přijímal jeho zprávy.
 3. Když je zpráva přijata: iterujeme nad klienty a pošleme ji každému z nich.
 4. Když je spojení uzavřeno: `klienti.delete(socket)`.
 
@@ -331,10 +331,10 @@ const wss = new ws.Server({noServer: true});
 
 const klienti = new Set();
 
-http.createServer((req, res) => {
+http.createServer((požadavek, odpověď) => {
   // zde zpracováváme jen websocketová spojení
   // ve skutečném projektu bychom zde měli i jiný kód, který by zpracoval jiné než websocketové požadavky
-  wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
+  wss.handleUpgrade(požadavek, požadavek.socket, Buffer.alloc(0), onSocketConnect);
 });
 
 function onSocketConnect(ws) {
@@ -358,7 +358,7 @@ Zde je funkční příklad:
 
 [iframe src="chat" height="100" zip]
 
-Můžete si jej také stáhnout (tlačítko vpravo nahoře ve vnitřním rámu) a spustit si jej lokálně. Jen si nezapomeňte nainstalovat [Node.js](https://nodejs.org/en/) a spustit `npm install ws` před spuštěním příkladu.
+Můžete si jej také stáhnout (tlačítko vpravo nahoře ve vnitřním rámu) a spustit si jej lokálně. Jen si nezapomeňte nainstalovat [Node.js](https://nodejs.org/en/) a před spuštěním příkladu spustit `npm install ws`.
 
 ## Shrnutí
 

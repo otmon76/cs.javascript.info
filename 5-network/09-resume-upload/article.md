@@ -4,7 +4,7 @@ Odeslat soubor metodou `fetch` je velice snadné.
 
 Jak obnovit odeslání po ztrátě spojení? Neexistuje pro to žádná vestavěná možnost, ale máme součásti, které nám to umožní implementovat.
 
-Obnovitelné odesílání by mělo přijít společně s oznamováním průběhu odesílání, protože očekáváme velké soubory (pokud můžeme mít potřebu je obnovovat). Jelikož `fetch` neumožňuje sledovat průběh odesílání, použijeme [XMLHttpRequest](info:xmlhttprequest).
+Obnovitelné odesílání by mělo přijít společně s oznamováním průběhu odesílání, protože očekáváme velké soubory (pokud máme potřebu je obnovovat). Jelikož `fetch` neumožňuje sledovat průběh odesílání, použijeme [XMLHttpRequest](info:xmlhttprequest).
 
 ## Nepříliš užitečná událost průběhu
 
@@ -16,7 +16,7 @@ Naneštěstí nám tady tato událost nepomůže obnovit odesílání, protože 
 
 Možná byla uložena do bufferu místní síťovou proxy, možná vzdálený serverový proces spadl a nemohl je zpracovat, nebo prostě byla ztracena po cestě a nedostala se k příjemci.
 
-Z toho důvodu je tato událost užitečná jen k zobrazení hezkého ukazatele průběhu.
+Tato událost je tedy užitečná jen k zobrazení hezkého ukazatele průběhu.
 
 Abychom mohli obnovit odesílání, musíme znát *přesný* počet bytů, které server přijal. A ten nám může sdělit jedině server, proto vytvoříme dodatečný požadavek.
 

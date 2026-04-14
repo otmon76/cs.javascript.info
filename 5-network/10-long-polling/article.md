@@ -35,7 +35,7 @@ Tato situace, kdy prohlížeč pošle požadavek a pak udržuje se serverem ček
 
 Pokud je spojení ztraceno, například kvůli síťové chybě, prohlížeč okamžitě pošle nový požadavek.
 
-Náčrt funkce `podpis` na straně klienta, která vytváří dlouhé požadavky:
+Nástin funkce `podpis` na straně klienta, která vytváří dlouhé požadavky:
 
 ```js
 async function podpis() {
@@ -71,7 +71,7 @@ Jak vidíte, funkce `podpis` vytvoří požadavek, pak počká na odpověď, zpr
 
 Architektura serveru musí být schopna pracovat s mnoha čekajícími spojeními.
 
-Některé serverové architektury spouštějí pro každé spojení jeden proces, což vede k tomu, že mají tolik procesů, kolik je spojení, přičemž každý proces spotřebuje určité množství paměti. Příliš mnoho spojení tedy může zahltit celou paměť.
+Některé serverové architektury spouštějí pro každé spojení jeden proces, což vede k tomu, že vznikne tolik procesů, kolik je spojení, přičemž každý proces zabírá určité množství paměti. Příliš mnoho spojení tedy může zahltit celou paměť.
 
 Často je to případ backendů napsaných v jazycích jako PHP nebo Ruby.
 
@@ -90,7 +90,7 @@ Kód pro prohlížeč se nachází v `browser.js`.
 
 ## Oblast použití
 
-Dlouhé dotazování funguje výborně v situacích, kdy jsou zprávy poměrně vzácné.
+Dlouhé dotazování funguje výborně v situacích, kdy zpráv není příliš mnoho.
 
 Jestliže však zprávy přicházejí velmi často, bude výše zobrazený nákres odesílání požadavků a přijímání zpráv vypadat jako zuby pily.
 
