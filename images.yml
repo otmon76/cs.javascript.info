@@ -708,3 +708,19 @@ ball_shift.svg:
 
 8bit-integer-256.svg:
   '8-bit integer': '8-bitové číslo'
+
+indexeddb-structure.svg:
+  'Database': 'Databáze'
+  'key1: value1': 'klíč1: hodn1'
+  'key2: value2': 'klíč2: hodn2'
+  'key3: value3': 'klíč3: hodn3'
+  'key4: value4': 'klíč4: hodn4'
+  'key5: value5': 'klíč5: hodn5'  
+  'objectStore': 'úložiště'
+  
+indexeddb-index.svg:
+  'books': 'knihy'
+  'price: 3': 'cena: 3'
+  'price: 5': 'cena: 5'
+  'price: 10': 'cena: 10'
+  
