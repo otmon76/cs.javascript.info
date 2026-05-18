@@ -8,7 +8,7 @@ Platí obecné pravidlo, že lokální styly fungují jedině uvnitř stínovéh
 
 Selektor `:host` nám umožňuje vybrat stínového hostitele (element obsahující stínový strom).
 
-Například vytváříme element `<vlastni-dialog>`, který by měl být vycentrován. K tomu potřebujeme nastavit přímo styl elementu `<vlastni-dialog>`.
+Například vytváříme element `<vlastni-dialog>`, který by měl být vycentrován. K tomu potřebujeme nastavit styl samotného elementu `<vlastni-dialog>`.
 
 Přesně tohle provádí `:host`:
 
@@ -66,13 +66,13 @@ Výjimkou je lokální vlastnost, která je označena jako `!important`. U takov
 
 Totéž jako `:host`, ale aplikuje se jen tehdy, když stínový hostitel odpovídá selektoru `selektor`.
 
-Například chceme centrovat `<vlastni-dialog>` jen tehdy, má-li atribut `centered`:
+Například chceme centrovat `<vlastni-dialog>` jen tehdy, má-li atribut `centrovan`:
 
 ```html run autorun="no-epub" untrusted height=80
 <template id="šablona">
   <style>
 *!*
-    :host([centered]) {
+    :host([centrovan]) {
 */!*
       position: fixed;
       left: 50%;
@@ -99,7 +99,7 @@ customElements.define('vlastni-dialog', class extends HTMLElement {
 </script>
 
 
-<vlastni-dialog centered>
+<vlastni-dialog centrovan>
   Centrován!
 </vlastni-dialog>
 
@@ -108,7 +108,7 @@ customElements.define('vlastni-dialog', class extends HTMLElement {
 </vlastni-dialog>
 ```
 
-Nyní se přidané centrovací styly aplikují jen na první dialog: `<vlastni-dialog centered>`.
+Nyní se přidané centrovací styly aplikují jen na první dialog: `<vlastni-dialog centrovan   >`.
 
 Když to shrneme, pro nastavení stylů hlavního elementu komponenty můžeme použít `:host`-rodinu selektorů. Tyto styly (pokud nemají `!important`) mohou být přepsány v dokumentu.
 
@@ -116,7 +116,7 @@ Když to shrneme, pro nastavení stylů hlavního elementu komponenty můžeme p
 
 Uvažujme nyní situaci se sloty.
 
-Elementy ve slotech pocházejí ze světlého DOMu, používají tedy dokumentové styly. Lokální styly nemají na obsah ve slotech žádný vliv.
+Elementy ve slotech pocházejí ze světlého DOMu, využívají tedy dokumentové styly. Lokální styly nemají na obsah ve slotech žádný vliv.
 
 V následujícím příkladu má `<span>` ve slotu tučné písmo, jak je uvedeno v dokumentovém stylu, ale nepřebírá `background` z lokálního stylu:
 ```html run autorun="no-epub" untrusted height=80
@@ -149,7 +149,7 @@ customElements.define('karta-uzivatele', class extends HTMLElement {
 
 Výsledek má tučné písmo, ale není červený.
 
-Jestliže chceme nastavit styly elementů ve slotu v naší komponentě, máme dvě možnosti.
+Jestliže chceme nastavit styly elementů ve slotech v naší komponentě, máme dvě možnosti.
 
 První je, že můžeme nastavit styly samotnému `<slot>` a spolehnout se na CSS dědičnost:
 
@@ -208,7 +208,7 @@ customElements.define('karta-uzivatele', class extends HTMLElement {
 </script>
 ```
 
-Prosíme všimněte si, že selektor `::slotted` nemůže klesat níž do slotu. Tyto selektory jsou nesprávné:
+Prosíme všimněte si, že selektor `::slotted` nemůže klesat hlouběji do slotu. Tyto selektory jsou nesprávné:
 
 ```css
 ::slotted(div span) {
@@ -228,11 +228,11 @@ Jak můžeme nastavit styl vnitřních elementů komponenty z hlavního dokument
 
 Selektory jako `:host` aplikují pravidla na element `<vlastni-dialog>` nebo `<karta-uzivatele>`, ale jak nastavit styly elementů stínového DOMu uvnitř nich?
 
-Neexistuje žádný selektor, který by působil přímo na styly stínového DOMu z dokumentu. Avšak stejně jako vystavujeme metody, pomocí nichž lze interagovat s naší komponentou, můžeme vystavit CSS proměnné (volitelné CSS vlastnosti), aby jí bylo možné nastavit styly.
+Neexistuje žádný selektor, který by působil z dokumentu přímo na styly stínového DOMu. Avšak stejně jako vystavujeme metody, pomocí nichž lze interagovat s naší komponentou, můžeme vystavit CSS proměnné (volitelné CSS vlastnosti), aby jí bylo možné nastavit styly.
 
 **Volitelné CSS vlastnosti existují na všech úrovních, ve světlém i ve stínovém DOMu.**
 
-Například ve stínovém DOMu můžeme použít CSS proměnnou `--barva-pole-karty-uzivatele` k nastavení stylů polí a vnější dokument může nastavit její hodnotu:
+Například ve stínovém DOMu můžeme k nastavení stylů polí použít CSS proměnnou `--barva-pole-karty-uzivatele` a vnější dokument může nastavit její hodnotu:
 
 ```html
 <style>
@@ -308,11 +308,11 @@ Dokumentové styly mohou ovlivňovat:
 - stínového hostitele (protože přebývá ve vnějším dokumentu),
 - elementy ve slotech a jejich obsah (protože ten je také ve vnějším dokumentu).
 
-Když se CSS vlastnosti dostanou do konfliktu, mají přednost styly z běžného dokumentu, pokud vlastnost není označena jako `!important`. Pak mají přednost lokální styly.
+Když se CSS vlastnosti dostanou do konfliktu, mají přednost styly z dokumentu, pokud vlastnost není označena jako `!important`. Pak mají přednost lokální styly.
 
 Volitelné CSS vlastnosti se propalují do stínového DOMu. Používají se jako „háky“, kterými lze nastavit styly komponenty:
 
-1. Komponenta používá volitelnou CSS vlastnost k nastavení stylů klíčových elementů, například `var(--titulek-názvu-komponenty, <standardní hodnota>)`.
+1. Komponenta používá volitelnou CSS vlastnost k nastavení stylů klíčových elementů, například `var(--titulek-nazvu-komponenty, <standardní hodnota>)`.
 2. Autor komponenty publikuje tyto vlastnosti pro vývojáře. Jsou stejně důležité jako ostatní veřejné metody komponenty.
-3. Když chce vývojář nastavit styl titulku, přiřadí hodnotu do CSS vlastnosti `--titulek-názvu-komponenty` stínového hostitele nebo výše.
+3. Když chce vývojář nastavit styl titulku, přiřadí hodnotu do CSS vlastnosti `--titulek-nazvu-komponenty` stínového hostitele nebo výše.
 4. Spokojenost na obou stranách!

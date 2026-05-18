@@ -1,10 +1,10 @@
 # Stínový DOM a události
 
-Myšlenkou stínového stromu je skrýt vnitřní implementaci detailů komponenty.
+Myšlenkou stínového stromu je zapouzdřit vnitřní implementaci detailů komponenty.
 
 Řekněme, že uvnitř stínového DOMu komponenty `<karta-uzivatele>` nastane událost kliknutí. Skripty v hlavním dokumentu však nemají ponětí o vnitřku stínového DOMu, zvláště pokud komponenta pochází z knihovny třetí strany.
 
-Aby tedy detaily zůstaly ukryty, prohlížeč tuto událost *přesměruje*.
+Aby tedy detaily zůstaly zapouzdřeny, prohlížeč tuto událost *přesměruje*.
 
 **Když jsou události, které se stanou ve stínovém DOMu, zachyceny mimo komponentu, jejich cílem je hostitelský element.**
 
@@ -65,17 +65,17 @@ kartaUživatele.onclick = e => alert(`Vnější cíl: ${e.target.tagName}`);
 </script>
 ```
 
-Jestliže dojde ke kliknutí na `"Jan Novák"`, ve vnitřním i vnějším handleru bude cílem `<span slot="uživatel">`. To je element ze světlého DOMu, takže nedojde k přesměrování.
+Jestliže nastane kliknutí na `"Jan Novák"`, ve vnitřním i vnějším handleru bude cíl `<span slot="uživatel">`. To je element ze světlého DOMu, takže nedojde k přesměrování.
 
-Naproti tomu jestliže dojde ke kliknutí na element pocházející ze stínového DOMu, např. `<b>Jméno:</b>`, pak když probublá ven ze stínového DOMu, jeho `událost.target` se nastaví na `<karta-uzivatele>`.
+Naproti tomu jestliže nastane kliknutí na element pocházející ze stínového DOMu, např. `<b>Jméno:</b>`, pak když probublá ven ze stínového DOMu, jeho `událost.target` se nastaví na `<karta-uzivatele>`.
 
-## Bublání, event.composedPath()
+## Bublání, událost.composedPath()
 
 Pro účely bublání událostí se používá zploštělý DOM.
 
 Máme-li tedy element ve slotu a někde uvnitř něj nastane událost, tato událost probublá do `<slot>` a výš.
 
-Celou cestu k originálnímu cíli události se všemi stínovými elementy je možné získat voláním `událost.composedPath()`. Jak vidíme z názvu metody, je vrácena cesta po kompozici.
+Celou cestu k původnímu cíli události se všemi stínovými elementy je možné získat voláním `událost.composedPath()`. Jak vidíme z názvu metody, je vrácena cesta po kompozici.
 
 V uvedeném příkladu je zploštělý DOM následující:
 
@@ -83,7 +83,7 @@ V uvedeném příkladu je zploštělý DOM následující:
 <karta-uzivatele id="kartaUživatele">
   #shadow-root
     <div>
-      <b>Name:</b>
+      <b>Jméno:</b>
       <slot name="uživatel">
         <span slot="uživatel">Jan Novák</span>
       </slot>
@@ -100,7 +100,7 @@ Je to podobný princip jako u jiných metod, které pracují se stínovým DOMem
 ```
 
 
-## event.composed
+## událost.composed
 
 Většina událostí úspěšně probublá skrz hranici stínového DOMu, ale některé události to neudělají.
 
@@ -123,7 +123,7 @@ Existují však události, které mají `composed: false`:
 - `select`,
 - `slotchange`.
 
-Tyto události je možné zachytit jedině na elementech uvnitř stejného DOMu, kde sídlí cíl události.
+Tyto události je možné zachytit jedině na elementech uvnitř stejného DOMu, v němž sídlí cíl události.
 
 ## Vlastní události
 
@@ -188,4 +188,4 @@ Tyto události můžeme zachytit jedině na elementech uvnitř stejného DOMu.
 
 Pokud vytváříme `CustomEvent`, měli bychom výslovně nastavit `composed: true`.
 
-Prosíme všimněte si, že v případě vnořených komponent může být jeden stínový DOM vnořen do druhého. V tom případě složené události bublají skrz hranice všech stínových DOMů. Pokud tedy je událost určena jen pro bezprostředně uzavírající komponentu, můžeme ji ve stínovém hostiteli ošetřit a nastavit `composed: false`. Pak se dostane ven ze stínového DOMu komponenty, ale neprobublá do DOMu vyšší úrovně.
+Prosíme všimněte si, že v případě vnořených komponent může být jeden stínový DOM vnořen do druhého. V tom případě události s `composed` bublají skrz hranice všech stínových DOMů. Pokud tedy je událost určena jen pro bezprostředně uzavírající komponentu, můžeme ji ve stínovém hostiteli ošetřit a nastavit `composed: false`. Pak se dostane ven ze stínového DOMu komponenty, ale neprobublá do DOMu vyšší úrovně.
