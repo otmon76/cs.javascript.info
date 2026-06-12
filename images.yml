@@ -724,3 +724,10 @@ indexeddb-index.svg:
   'price: 5': 'cena: 5'
   'price: 10': 'cena: 10'
   
+regexp-nested-groups-pattern.svg:
+  'span class="my"': 'span class="moje"'
+  'class="my"': 'class="moje"'
+  
+regexp-nested-groups-matches.svg:
+  'span class="my"': 'span class="moje"'
+  'class="my"': 'class="moje"'
