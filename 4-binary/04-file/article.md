@@ -63,7 +63,7 @@ Volba metody `read*` závisí na tom, kterému formátu dáváme přednost a jak
 
 - `readAsArrayBuffer` -- pro binární soubory, pro provádění operací nízké úrovně. Operace vysoké úrovně, např. vyjímání části dat, jsou ve `File` zděděny z `Blob`, takže je můžeme volat rovnou bez načítání.
 - `readAsText` -- pro textové soubory, když chceme získat řetězec.
-- `readAsDataURL` -- když bychom chtěli použít data v `src` značky `img` nebo jiné. Pro tento účel existuje alternativa k načítání souboru, kterou jsme probrali v kapitole <info:blob>: `URL.createObjectURL(soubor)`.
+- `readAsDataURL` -- kdybychom chtěli použít data v `src` značky `img` nebo jiné. Pro tento účel existuje alternativa k načítání souboru, kterou jsme probrali v kapitole <info:blob>: `URL.createObjectURL(soubor)`.
 
 Když načítání probíhá, nastávají tyto události:
 - `loadstart` -- načítání začalo.

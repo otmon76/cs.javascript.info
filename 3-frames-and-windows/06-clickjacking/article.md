@@ -11,8 +11,8 @@ Myšlenka je velmi jednoduchá.
 Clickjacking na Facebook byl proveden tímto způsobem:
 
 1. Návštěvník je nalákán na zlou stránku. Nezáleží na tom, jak.
-2. Stránka obsahuje neškodně vypadající odkaz (např. „zbohatněte hned teď“ nebo „klikněte sem, o    brovská legrace“).
-3. Přes tento odkaz zlá stránka umístí průhledný `<iframe>` se `src` z facebook.com takovým způsobem, že přímo nd tomto odkazu je tlačítko „To se mi líbí“. To je obvykle provedeno použitím `z-index`.
+2. Stránka obsahuje neškodně vypadající odkaz (např. „zbohatněte hned teď“ nebo „klikněte sem, obrovská legrace“).
+3. Přes tento odkaz zlá stránka umístí průhledný `<iframe>` se `src` z facebook.com takovým způsobem, že přímo na tomto odkazu je tlačítko „To se mi líbí“. To je obvykle provedeno použitím `z-index`.
 4. Když se návštěvník pokusí kliknout na tento odkaz, ve skutečnosti klikne na tlačítko.
 
 ## Demo
@@ -99,7 +99,7 @@ window.onbeforeunload = function() {
 
 Když se `iframe` pokusí změnit `top.location`, návštěvník dostane otázku, zda opravdu chce odejít.
 
-Ve většině případů návštěvník odpoví záporně, neboť o vnitřním rámu neví -- jediné, co vidí, je vrchní stránka, a tak nemá důvod odejít. Proto se `top.location` nezmění!
+Ve většině případů návštěvník odpoví záporně, neboť o vnitřním rámu neví -- nevidí nic jiného než vrchní stránku, a tak nemá důvod odejít. Proto se `top.location` nezmění!
 
 V akci:
 
@@ -107,7 +107,7 @@ V akci:
 
 ### Atribut sandbox
 
-Jednou z věcí, které atribut `sandbox` omezuje, je navigace. Vnitřní rám se `sandbox` nemůže změnit `top.location`.
+Jednou z věcí, které atribut `sandbox` omezuje, je navigace. Vnitřní rám obsahující `sandbox` nemůže změnit `top.location`.
 
 Můžeme tedy přidat vnitřní rám obsahující `sandbox="allow-scripts allow-forms"`. Tím se omezení zmírní a budou povoleny skripty a formuláře. Neuvedeme však `allow-top-navigation`, takže změna `top.location` bude zakázána.
 
@@ -123,7 +123,7 @@ Existují i jiné způsoby, jak tuto jednoduchou ochranu překonat.
 
 Hlavička `X-Frame-Options` ze strany serveru může povolit nebo zakázat zobrazení stránky v rámu.
 
-Musí být poslána skutečně jako HTTP hlavička: pokud ji prohlížeč nalezne v HTML značce `<meta>`, bude ji ignorovat, takže `<meta http-equiv="X-Frame-Options"...>` nic neudělá.
+Musí být poslána jako skutečná HTTP hlavička: pokud ji prohlížeč nalezne v HTML značce `<meta>`, bude ji ignorovat, takže `<meta http-equiv="X-Frame-Options"...>` nic neudělá.
 
 Hlavička může mít tři hodnoty:
 
@@ -134,7 +134,7 @@ Hlavička může mít tři hodnoty:
 : Umožní zobrazení v rámu, jestliže rodičovský dokument pochází ze stejného původu.
 
 `ALLOW-FROM doména`
-: Umožní zobrazení v rámu, jestliže rodičovský dokument pochází ze zadané domény.
+: Umožní zobrazení v rámu, jestliže rodičovský dokument pochází z uvedené domény.
 
 Například Twitter používá `X-Frame-Options: SAMEORIGIN`.
 
@@ -184,7 +184,7 @@ Něco takového:
 </script>
 ```
 
-Demo:
+Ukázka:
 
 [codetabs src="protector"]
 
@@ -212,7 +212,7 @@ Clickjacking je způsob, jak „přimět“ uživatele kliknout na stránku obě
 
 Hacker může umístit odkaz na svou zlou stránku do zprávy nebo nalákat návštěvníky na svou stránku jinými způsoby. Možností je mnoho.
 
-Z jednoho pohledu není tento útok „hluboký“: všechno, co hacker udělá, je zachycení jediného kliknutí. Avšak z jiného pohledu, jestliže hacker ví, že po kliknutí se objeví další ovládací prvky, může pomocí lstivých zpráv nalákat uživatele, aby kliknul i na ně.
+Z jednoho pohledu není tento útok „hluboký“: všechno, co hacker udělá, je zachycení jediného kliknutí. Avšak z jiného pohledu, jestliže hacker ví, že po kliknutí se objeví další ovládací prvky, může lstivými zprávami nalákat uživatele, aby kliknul i na ně.
 
 Tento útok je poměrně nebezpečný, neboť když navrhujeme uživatelské rozhraní, obvykle nepředpokládáme, že na ně může kliknout hacker jménem uživatele. Zranitelnosti tedy lze najít na zcela nečekaných místech.
 

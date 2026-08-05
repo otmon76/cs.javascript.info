@@ -7,13 +7,13 @@ V zásadě jenom zavoláte:
 window.open('https://javascript.info/')
 ```
 
-...A tím se otevře nové okno se zadaným URL. Většina moderních prohlížečů je konfigurována tak, aby otevřela URL v nové záložce místo samostatného okna.
+...A tím se otevře nové okno se zadanou URL. Většina moderních prohlížečů je konfigurována tak, aby otevřela URL v nové záložce a ne v samostatném okně.
 
 Vyskakovací okna existují už opravdu dlouhou dobu. Původní myšlenkou bylo zobrazit další obsah bez nutnosti zavřít hlavní okno. V současnosti jsou jiné způsoby, jak to udělat: můžeme načíst obsah dynamicky pomocí [fetch](info:fetch) a zobrazit jej v dynamicky generovaném `<div>`. Vyskakovací okna tedy nejsou něco, co bychom používali každý den.
 
 Vyskakovací okna jsou navíc problematická na mobilních zařízeních, která nezobrazují více oken současně.
 
-Stále však existují úlohy, v nichž se vyskakovací okna stále používají, např. pro autorizaci OAuth (přihlášení s Googlem/Facebookem/...), protože:
+Stále však existují úlohy, v nichž se vyskakovací okna dosud používají, např. pro autorizaci OAuth (přihlášení s Googlem/Facebookem/...), protože:
 
 1. Vyskakovací okno je oddělené okno, které má své vlastní nezávislé JavaScriptové prostředí. Otevření vyskakovacího okna od třetí strany z neprověřené stránky je tedy bezpečné.
 2. Otevřít vyskakovací okno je velmi jednoduché.
@@ -36,7 +36,7 @@ button.onclick = () => {
 };
 ```
 
-Tímto způsobem jsou uživatelé do určité míry chráněni před nechtěnými vyskakovacími okny, ale tato funkcionalita přitom není zcela potlačena.
+Tímto způsobem jsou uživatelé do určité míry chráněni před nechtěnými vyskakovacími okny, ale přitom tato funkcionalita není zcela potlačena.
 
 ## window.open
 
@@ -135,7 +135,7 @@ V jiných případech, např. pokud hlavní okno je ze `site.com` a vyskakovací
 
 ## Přístup do hlavního okna z vyskakovacího okna
 
-Obdobně může vyskakovací okno přistupovat k „otevírajícímu“ pomocí odkazu `window.opener`. Ten je `null` pro všechna okna kromě vyskakovacích.
+Obdobně může vyskakovací okno přistupovat k „otevírajícímu“ pomocí odkazu `window.opener`. Ten je `null` ve všech oknech kromě vyskakovacích.
 
 Pokud si spustíte následující kód, nahradí obsah otevírajícího (aktuálního) okna za „Test“:
 
@@ -194,7 +194,7 @@ Aby prohlížeč zabránil zneužití, obvykle tyto metody blokuje. Spolehlivě 
 ```
 
 ```warn header="Není zde minimalizace ani maximalizace"
-JavaScript nemá žádný způsob, jak minimalizovat nebo maximalizovat okno. Tyto funkce na úrovni operačního systému jsou před front-end vývojáři ukryty.
+JavaScript nemá žádný způsob, jak minimalizovat nebo maximalizovat okno. Tyto funkce na úrovni operačního systému jsou před vývojáři předních stran ukryty.
 
 Metody pro přesun a změnu velikosti na minimalizovaných a maximalizovaných oknech nefungují.
 ```

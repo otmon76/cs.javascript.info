@@ -21,7 +21,7 @@ let řetězec = dekodér.decode([vstup], [možnosti]);
 ```
 
 - **`vstup`** -- `BufferSource` k dekódování.
-- **`options`** -- nepovinný objekt:
+- **`možnosti`** -- nepovinný objekt:
   - **`stream`** -- `true` při dekódování proudů, kdy je `dekodér` volán opakovaně pro přicházející bloky dat. V takovém případě může být znak, zakódovaný ve více bytech, občas rozdělen mezi jednotlivé bloky. Tato možnost říká, aby si `TextDecoder` pamatoval „nedokončené“ znaky a dekódoval je, až přijde další blok.
 
 Příklad:

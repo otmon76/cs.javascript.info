@@ -7,7 +7,7 @@ V JavaScriptu je to všechno proveditelné a binární operace jsou vysoce výko
 Mohou však způsobit menší zmatení, protože pro práci s nimi existuje mnoho tříd. Jmenujme některé:
 - `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File`, atd.
 
-Ve srovnání s jinými jazyky jsou binární data v JavaScriptu implementována nestandardním způsobem. Ale když si to všechno utřídíme, bude nám to rychle připadat jednoduché.
+Ve srovnání s jinými jazyky jsou binární data v JavaScriptu implementována nestandardním způsobem. Ale když si to všechno utřídíme, začne nám to rychle připadat jednoduché.
 
 **Základním binárním objektem je `ArrayBuffer` -- odkaz na souvislou oblast paměti pevné délky.**
 
@@ -19,7 +19,7 @@ alert(buffer.byteLength); // 16
 
 Tím obsadíme souvislou oblast paměti o délce 16 bytů a vyplníme ji nulami.
 
-```warn header="`ArrayBuffer` není pole něčeho"
+```warn header="`ArrayBuffer` není pole ničeho"
 Vyhněme se možnému zdroji zmatků. `ArrayBuffer` nemá nic společného s `Array`:
 - Má pevnou délku, kterou nemůžeme zvýšit ani snížit.
 - V paměti zabírá přesně uvedené množství místa.
@@ -56,7 +56,7 @@ let náhled = new Uint32Array(buffer); // zacházíme s ním jako s posloupnost�
 alert(Uint32Array.BYTES_PER_ELEMENT); // 4 byty na jedno číslo
 */!*
 
-alert(náhled.length); // 4, počet čísel, který dokáže uložit
+alert(náhled.length); // 4, počet čísel, která dokáže uložit
 alert(náhled.byteLength); // 16, velikost v bytech
 
 // zapišme do něj hodnotu
@@ -169,7 +169,7 @@ Pro 257 je binární podoba `100000001` (9 bitů), uloží se 8 bitů zprava, v 
 
 Jinými slovy, uloží se zbytek po dělení tohoto čísla číslem 2<sup>8</sup>.
 
-Následuje demo:
+Následuje ukázka:
 
 ```js run
 let uint8array = new Uint8Array(16);
@@ -199,7 +199,7 @@ Je tady však několik věcí, které dělat nemůžeme:
 
 Jsou tady však dvě další metody:
 
-- `pole.set(zdrojovéPole, [pozice])` zkopíruje všechny prvky ze `zdrojovéPole` do `pole`, počínaje od `pozice` (standardně 0).
+- `pole.set(zdrojovéPole, [pozice])` zkopíruje všechny prvky ze `zdrojovéPole` do `pole`, počínajíc od `pozice` (standardně 0).
 - `pole.subarray([začátek, konec])` vytvoří nový náhled na stejný typ od `začátek` do `konec` (nebude zahrnut). Podobá se metodě `slice` (ta je rovněž podporována), ale nic se nekopíruje -- vytvoří se jen nový náhled, který bude pracovat nad zadanou částí dat.
 
 Tyto metody nám umožňují typová pole kopírovat, směšovat, vytvářet nová pole z existujících a podobně.

@@ -14,7 +14,7 @@ Všechna následující URL mají stejný původ:
 - `http://site.com/`
 - `http://site.com/my/page.html`
 
-Následující nemají stejný původ:
+Následující nemají stejný původ jako předchozí:
 
 - <code>http://<b>www.</b>site.com</code> (jiná doména: `www.` vadí)
 - <code>http://<b>site.org</b></code> (jiná doména: `.org` vadí)
@@ -23,7 +23,7 @@ Následující nemají stejný původ:
 
 Politika „stejného původu“ říká, že:
 
-- jestliže máme odkaz na jiné okno, např. vyskakovací okno vytvořené pomocí `window.open` nebo okno uvnitř `<iframe>`, a toto okno pochází ze stejného původu, máme k tomuto oknu plný přístup.
+- jestliže máme odkaz na jiné okno, např. vyskakovací okno vytvořené pomocí `window.open` nebo okno uvnitř `<iframe>`, a toto okno pochází ze stejného původu, máme k tomuto oknu plný přístup;
 - v opačném případě, když pochází z jiného původu, nemůžeme přistupovat k jeho obsahu: k proměnným, k dokumentu, zkrátka k ničemu. Jedinou výjimkou je `location`: tu můžeme změnit (a tedy přesměrovat uživatele). Nemůžeme však lokaci *načíst* (takže nevidíme, kde se uživatel právě nachází, aby nedošlo k úniku informací).
 
 ### V akci: iframe
@@ -123,9 +123,9 @@ Přesto ji v současnosti všechny prohlížeče stále podporují. A tato podpo
 ```
 
 
-## Vnitřní rám: chyták s nesprávným dokumentem
+## Vnitřní rám: záludnost s nesprávným dokumentem
 
-Když vnitřní rám pochází ze stejného původu a my můžeme přistupovat k jeho `document`, je tady chyták. Nevztahuje se k záležitostem ohledně stejného původu, ale je důležité o něm vědět.
+Když vnitřní rám pochází ze stejného původu a my můžeme přistupovat k jeho `document`, je tady jedna záludnost. Nevztahuje se k záležitostem ohledně stejného původu, ale je důležité o ní vědět.
 
 Vnitřní rám má dokument ihned po svém vytvoření. Ale tento dokument se liší od dokumentu, do něhož se načte!
 
@@ -216,9 +216,9 @@ if (window == top) { // aktuální okno == window.top?
 }
 ```
 
-## Atribut "sandbox" vnitřního rámu
+## Atribut „sandbox“ vnitřního rámu
 
-Atribut `sandbox` (*pískoviště*) nám umožní zakázat uvnitř `<iframe>` určité akce, aby zabránil spuštění nevěrohodného kódu. Vytvoří tedy z vnitřního rámu „pískoviště“, s nímž se bude zacházet, jako by pocházelo z jiného původu, a/nebo s určitými dalšími omezeními.
+Atribut `sandbox` (pískoviště) nám umožní zakázat uvnitř `<iframe>` určité akce, aby zabránil spuštění nevěrohodného kódu. Vytvoří tedy z vnitřního rámu „pískoviště“, s nímž se bude zacházet, jako by pocházelo z jiného původu, a/nebo s určitými dalšími omezeními.
 
 Na `<iframe sandbox src="...">` se aplikuje „standardní sada“ omezení. Tu však můžeme zmírnit, pokud do hodnoty tohoto atributu uvedeme seznam omezení oddělených mezerami, která by se neměla aplikovat, například: `<iframe sandbox="allow-forms allow-popups">`.
 
@@ -227,7 +227,7 @@ Jinými slovy, prázdný atribut `"sandbox"` vytvoří nejpřísnější možná
 Seznam omezení je následující:
 
 `allow-same-origin`
-: Standardně `"sandbox"` vynucuje pro vnitřní rám politiku „jiného původu“. Jinými slovy, nutí prohlížeč zacházet s tímto `iframe`, jako by pocházel z jiného původu, i když jeho `src` ukazuje na stejné sídlo, se všemi omezeními pro skripty, která z toho vyplývají. Tato možnost tuto vlastnost ruší.
+: Standardně `"sandbox"` vynucuje pro vnitřní rám politiku „jiného původu“. Jinými slovy, nutí prohlížeč zacházet s tímto `iframe`, jako by pocházel z jiného původu, i když jeho `src` ukazuje na stejné sídlo, se všemi omezeními pro skripty, která z toho vyplývají. Tato volba toto chování ruší.
 
 `allow-top-navigation`
 : Umožňuje tomuto `iframe` změnit `parent.location`.
@@ -245,7 +245,7 @@ Další omezení najdete v [manuálu](mdn:/HTML/Element/iframe).
 
 Následující příklad demonstruje vnitřní rám jako pískoviště se standardní sadou omezení: `<iframe sandbox src="...">`. Rám obsahuje krátký JavaScriptový kód a formulář.
 
-Prosíme všimněte si, že v něm nic nefunguje. Standardní sada omezení je tedy opravdu tvrdá:
+Prosíme všimněte si, že v něm nic nefunguje. Standardní sada omezení je tedy opravdu přísná:
 
 [codetabs src="sandbox" height=140]
 
@@ -269,7 +269,7 @@ Okno, které chce poslat zprávu, zavolá na přijímajícím okně metodu [post
 Argumenty:
 
 `data`
-: Data k odeslání. Může to být libovolný objekt, data budou naklonována „algoritmem strukturované serializace“. IE podporuje pouze řetězce, takže bychom na složitých objektech měli volat `JSON.stringify`, abychom tento prohlížeč podporovali.
+: Data k odeslání. Může to být libovolný objekt, data budou naklonována „algoritmem strukturované serializace“. IE podporuje pouze řetězce, takže pokud chceme tento prohlížeč podporovat, měli bychom na složitých objektech volat `JSON.stringify`.
 
 `původCíle`
 : Specifikuje původ cílového okna, takže zprávu získá pouze okno se zadaným původem.
@@ -320,7 +320,7 @@ Objekt této události má speciální vlastnosti:
 `source`
 : Odkaz na odesílající okno. Pokud chceme, můžeme okamžitě poslat zprávu zpět voláním `source.postMessage(...)`.
 
-K přiřazení tohoto handleru bychom měli použít `addEventListener`, krátká syntaxe `window.onmessage` nefunguje.
+Tento handler bychom měli přiřadit metodou `addEventListener`, krátká syntaxe `window.onmessage` nefunguje.
 
 Příklad:
 
@@ -343,7 +343,7 @@ Celý příklad:
 
 ## Shrnutí
 
-Abychom mohli volat metody a přistupovat k obsahu jiného okna, měli bychom na něj nejprve mít odkaz.
+Abychom mohli volat metody jiného okna a přistupovat k jeho obsahu, měli bychom na něj nejprve mít odkaz.
 
 Pro vyskakovací okna máme tyto odkazy:
 - Z otevírajícího okna: `window.open` -- otevře nové okno a vrátí odkaz na ně.
