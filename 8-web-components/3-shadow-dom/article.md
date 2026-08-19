@@ -75,7 +75,7 @@ Nejprve volání `elem.attachShadow({mode: …})` vytvoří stínový strom.
 
 Jsou tady dvě omezení:
 1. Pro každý element můžeme vytvořit jen jeden stínový kořen.
-2. `elem` musí být buď vlastní element, nebo jeden z následujících: `article`, `aside`, `blockquote`, `body`, `div`, `footer`, `h1..h6`, `header`, `main` `nav`, `p`, `section` nebo `span`. Ostatní elementy, např. `<img>`, nemohou obsahovat stínový strom.
+2. `elem` musí být buď vlastní element, nebo jeden z následujících: `article`, `aside`, `blockquote`, `body`, `div`, `footer`, `h1..h6`, `header`, `main`, `nav`, `p`, `section` nebo `span`. Ostatní elementy, např. `<img>`, nemohou obsahovat stínový strom.
 
 Volba `mode` nastavuje úroveň zapouzdření. Musí mít jednu z těchto dvou hodnot:
 - `"open"` (otevřený) -- stínový strom je dostupný ve vlastnosti `elem.shadowRoot`.

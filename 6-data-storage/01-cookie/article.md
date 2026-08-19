@@ -10,9 +10,9 @@ Jedním z nejrozšířenějších případů jejich použití je autentifikace:
 2. Když bude příště poslán požadavek na stejnou doménu, prohlížeč pošle po síti tuto cookie v HTTP hlavičce `Cookie`.
 3. Tak se server dozví, kdo učinil požadavek.
 
-K cookies můžeme přistupovat i z prohlížeče, a to pomocí vlastnosti `document.cookie`.
+Ke cookies můžeme přistupovat i z prohlížeče, a to pomocí vlastnosti `document.cookie`.
 
-Ohledně cookies a jejich atributů existuje mnoho záludností. V této kapitole je podrobně probereme.
+Cookies a jejich atributy s sebou přinášejí mnoho záludností. V této kapitole je podrobně probereme.
 
 ## Načítání z document.cookie
 
@@ -38,7 +38,7 @@ Ponecháváme to čtenáři jako cvičení. Na konci této kapitoly najdete něk
 
 ## Zápis do document.cookie
 
-Do `document.cookie` můžeme zapisovat. Není to však datová vlastnost, nýbrž [přístupová vlastnost (getter/setter)](info:property-accessors). Přiřazení do ní se zpracovává speciálně.
+Do `document.cookie` můžeme zapisovat. Není to však datová vlastnost, nýbrž [přístupová vlastnost (getter/setter)](info:property-accessors). Přiřazení do ní se zpracovává speciálním způsobem.
 
 **Operace zápisu do `document.cookie` změní jen cookie, která je v ní uvedena, a ostatní cookies ponechá nezměněné.**
 
@@ -206,7 +206,7 @@ Prohlížeč posílá cookies pokaždé, když navštívíte sídlo `bank.com`, 
 
 Tento útok se nazývá „Cross-Site Request Forgery“ („padělání požadavků z jiného sídla“, zkráceně XSRF).
 
-Skutečné banky jsou proti němu samozřejmě chráněny. Všechny formuláře generované sídlem `bank.com` obsahují speciální pole, tzv. „XSRF ochranný token“, který zlá stránka nedokáže generovat nebo vytáhnout ze vzdálené stránky. Může tam poslat formulář, ale nemůže získat data zpět. Sídlo `bank.com` kontroluje tento token v každém formuláři, který přijme.
+Skutečné banky jsou před ním samozřejmě chráněny. Všechny formuláře generované sídlem `bank.com` obsahují speciální pole, tzv. „XSRF ochranný token“, který zlá stránka nedokáže generovat nebo vytáhnout ze vzdálené stránky. Může tam poslat formulář, ale nemůže získat data zpět. Sídlo `bank.com` kontroluje tento token v každém formuláři, který přijme.
 
 Implementace takové ochrany ovšem zabere nějaký čas. Musíme zajistit, aby požadované pole s tokenem obsahoval každý formulář, a musíme také kontrolovat všechny požadavky.
 
@@ -222,7 +222,7 @@ Cookie s atributem `samesite=strict` nebude nikdy odeslána, pokud uživatel př
 
 Jinými slovy, kdykoli uživatel následuje odkaz ze svého emailu, odesílá formulář z `evil.com` nebo provádí jakoukoli operaci pocházející z jiné domény, cookie se neodešle.
 
-Jestliže autentifikační cookies mají atribut `samesite=strict`, XSRF útok nemá šanci na úspěch, protože odeslání z `evil.com` přichází bez cookies. Sídlo `bank.com` tedy uživatele nepozná a platbu neprovede.
+Jestliže autentifikační cookies mají atribut `samesite=strict`, XSRF útok nemá šanci na úspěch, protože požadavek odeslaný z `evil.com` přijde bez cookies. Sídlo `bank.com` tedy uživatele nepozná a platbu neprovede.
 
 Tato ochrana je poměrně spolehlivá. Cookie s atributem `samesite=strict` odešlou jen operace přicházející z `bank.com`, např. odeslání formuláře z jiné stránky na `bank.com`.
 
@@ -306,14 +306,14 @@ Prosíme všimněte si, že hodnota cookie je zakódována, proto `getCookie` po
 
 ### setCookie(název, hodnota, atributy)
 
-Nastaví cookie s názvem `název` na hodnotu `hodnota` se standardní `path=/` (lze modifikovat přidáním dalších standardů):
+Nastaví cookie s názvem `název` na hodnotu `hodnota` se standardní `path=/` (lze modifikovat přidáním standardních hodnot dalších atributů):
 
 ```js run
 function setCookie(název, hodnota, atributy = {}) {
 
   atributy = {
     path: '/',
-    // v případě potřeby sem přidejte další standardní hodnoty
+    // v případě potřeby sem přidejte standardní hodnoty dalších atributů
     ...atributy
   };
 

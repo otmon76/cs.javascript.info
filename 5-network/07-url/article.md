@@ -82,7 +82,7 @@ new URL('https://google.com/search?query=JavaScript')
 
 K tomu slouží URL vlastnost: `url.searchParams`, objekt typu [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
 
-Ta poskytuje vhodné metody pro vyhledávací parametry:
+Ten poskytuje vhodné metody pro vyhledávací parametry:
 
 - **`append(název, hodnota)`** -- přidá parametr s názvem `název`,
 - **`delete(název)`** -- odstraní parametr s názvem `název`,
@@ -160,7 +160,7 @@ https://site.com:8080/path/page?p1=v1&p2=v2#hash
 
 Jak vidíme, znaky jako `:`, `?`, `=`, `&`, `#` jsou v URL povoleny.
 
-...Na druhou stranu, když se podíváme na samostatnou URL komponentu, např. vyhledávací parametr, tyto znaky musejí být zakódovány, aby se nerozbilo formátování.
+...Naproti tomu když se podíváme na samostatnou URL komponentu, např. vyhledávací parametr, tyto znaky musejí být zakódovány, aby se nerozbilo formátování.
 
 - `encodeURI` zakóduje pouze znaky, které jsou v URL zcela zakázány.
 - `encodeURIComponent` zakóduje tytéž znaky a navíc ještě znaky `#`, `$`, `&`, `+`, `,`, `/`, `:`, `;`, `=`, `?` a `@`.

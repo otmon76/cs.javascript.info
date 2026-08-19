@@ -154,6 +154,7 @@ xhr-preflight.svg:
   _defaults:
   Browser: 'Prohlížeč'
   Server: 'Server'
+  preflight: 'předběžný'
   Main HTTP-response: 'Hlavní HTTP odpověď'
   otherwise error: 'jinak chyba'
   'if allowed: success,': 'je-li povoleno, úspěch,'

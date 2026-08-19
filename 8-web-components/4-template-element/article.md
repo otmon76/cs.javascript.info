@@ -16,7 +16,7 @@ Například do něj můžeme vložit řádek tabulky `<tr>`:
 </template>
 ```
 
-Zpravidla když se pokusíme vložit `<tr>` třeba dovnitř `<div>`, prohlížeč detekuje vadnou strukturu DOMu a „opraví“ ji, přidá kolem něj `<table>`. To není to, co chceme. Naproti tomu `<template>` uchovává přesně to, co tam umístíme.
+Zpravidla když se pokusíme vložit `<tr>` třeba dovnitř `<div>`, prohlížeč detekuje vadnou strukturu DOMu a „opraví“ ji tak, že kolem ní přidá `<table>`. To není to, co chceme. Naproti tomu `<template>` uchovává přesně to, co tam umístíme.
 
 Do `<template>` můžeme ukládat i styly a skripty:
 
@@ -37,7 +37,7 @@ Obsah ožije (styly se aplikují, skripty se spustí atd.), až když jej vlož�
 
 ## Vložení šablony
 
-Obsah šablony je k dispozici ve své vlastnosti `content` jako [DocumentFragment](info:modifying-document#document-fragment) -- zvláštní typ DOM uzlu.
+Obsah šablony je k dispozici v její vlastnosti `content` jako [DocumentFragment](info:modifying-document#document-fragment) -- zvláštní typ DOM uzlu.
 
 Můžeme s ním zacházet jako s kterýmkoli jiným DOM uzlem až na jednu speciální vlastnost: když ho někam vložíme, namísto něj se vloží jeho děti.
 
@@ -105,7 +105,7 @@ Když to shrneme:
 
 - Obsahem `<template>` může být jakýkoli syntakticky správný HTML.
 - S obsahem `<template>` se zachází, jako by byl „mimo dokument“, takže nic neovlivní.
-- V JavaScriptu můžeme přistupovat k `template.content` a naklonovat ho, abychom ho mohli použít v nové komponentě.
+- V JavaScriptu můžeme přistupovat k obsahu šablony `šablona.content` a naklonovat ho, abychom ho mohli použít v nové komponentě.
 
 Značka `<template>` je poměrně unikátní, neboť:
 

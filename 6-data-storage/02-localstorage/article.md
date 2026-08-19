@@ -7,7 +7,7 @@ Zajímavé na nich je to, že data přežijí znovunačtení stránky (u `sessio
 K čemu jsou další objekty, když už máme cookies?
 
 - Na rozdíl od cookies nejsou webové ukládací objekty s každým požadavkem odesílány na server. Z toho důvodu do nich můžeme uložit mnohem více dat. Většina moderních prohlížečů dovoluje nejméně 5 megabytů dat (nebo více) a umožňuje to konfigurovat ve svých nastaveních.
-- Rovněž na rozdíl od cookies nemůže server manipulovat s ukládacími objekty pomoc9 HTTP hlaviček. Všechno se provádí v JavaScriptu.
+- Rovněž na rozdíl od cookies nemůže server manipulovat s ukládacími objekty pomocí HTTP hlaviček. Všechno se provádí v JavaScriptu.
 - Úložiště je vázáno na původ (trojice doména/protokol/port). To znamená, že různé protokoly nebo subdomény vytvářejí různé ukládací objekty a nemohou vzájemně přistupovat ke svým datům.
 
 Oba ukládací objekty poskytují stejné metody a vlastnosti:
@@ -187,7 +187,7 @@ Když jsou data v `localStorage` nebo `sessionStorage` změněna, spustí se ud�
 - `url` – URL dokumentu, na němž ke změně došlo.
 - `storageArea` – objekt `localStorage` nebo `sessionStorage`, v němž ke změně došlo.
 
-Důležité je, že tato událost se spustí na všech objektech `window`, kde je úložiště dostupné, kromě toho, který ji způsobil.
+Důležité je, že tato událost se spustí na všech objektech `window`, v nichž je úložiště dostupné, kromě toho, který ji způsobil.
 
 Vysvětlíme to.
 

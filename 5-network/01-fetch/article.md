@@ -62,7 +62,7 @@ if (odpověď.ok) { // pokud HTTP status je 200-299
 `Response` poskytuje několik metod založených na příslibech, které slouží k přístupu k tělu v různých formátech:
 
 - **`response.text()`** -- načte odpověď a vrátí ji jako text,
-- **`response.json()`** -- parsuje odpověď jako JSON,
+- **`response.json()`** -- rozparsuje odpověď ve formátu JSON,
 - **`response.formData()`** -- vrátí odpověď jako objekt `FormData` (bude vysvětleno v [příští kapitole](info:formdata)),
 - **`response.blob()`** -- vrátí odpověď jako [blob](info:blob) (binární data s typem),
 - **`response.arrayBuffer()`** -- vrátí odpověď jako [ArrayBuffer](info:arraybuffer-binary-arrays) (nízkoúrovňová reprezentace binárních dat),
@@ -153,7 +153,7 @@ for (let [klíč, hodnota] of odpověď.headers) {
 
 ## Hlavičky požadavku
 
-K nastavení hlavičky požadavku v metodě `fetch` můžeme použít volbu `headers`, která obsahuje objekt s odesílanými hlavičkami, například:
+K nastavení hlaviček požadavku v metodě `fetch` můžeme použít volbu `headers`, která obsahuje objekt s odesílanými hlavičkami, například:
 
 ```js
 let odpověď = fetch(chráněnéURL, {
@@ -186,7 +186,7 @@ let odpověď = fetch(chráněnéURL, {
 - `Proxy-*`
 - `Sec-*`
 
-Tyto hlavičky zajišťují správný a bezpečný HTTP, takže jsou ovládány výlučně prohlížečem.
+Tyto hlavičky zajišťují správný a bezpečný HTTP, takže jsou nastavovány výlučně prohlížečem.
 
 ## Požadavky POST
 
@@ -262,7 +262,7 @@ V následujícím příkladu máme `<canvas>`, do něhož můžeme kreslit pohyb
 </body>
 ```
 
-Prosíme všimněte si, že zde nenastavujeme `Content-Type` ručně, protože objekt `Blob` obsahuje vestavěný typ (zde `image/png`, který je generován metodou `toBlob`). Při odesílání objektu `Blob` se tento typ stane hodnotou `Content-Type`.
+Prosíme všimněte si, že zde nenastavujeme `Content-Type` ručně, protože objekt `Blob` obsahuje vestavěný typ (zde `image/png`, který je generován metodou `toBlob`). Při odesílání objektu `Blob` bude hodnota `Content-Type` nastavena na tento typ.
 
 Funkci `odeslat()` můžeme přepsat bez použití `async/await` následovně:
 
@@ -303,7 +303,7 @@ Vlastnosti odpovědi:
 
 Metody pro získání těla odpovědi:
 - **`response.text()`** -- vrátí odpověď jako text,
-- **`response.json()`** -- parsuje odpověď jako objekt v JSONu,
+- **`response.json()`** -- rozparsuje odpověď ve formátu JSON do objektu,
 - **`response.formData()`** -- vrátí odpověď jako objekt `FormData` (kódování `multipart/form-data`, viz příští kapitolu),
 - **`response.blob()`** -- vrátí odpověď jako [blob](info:blob) (binární data s typem),
 - **`response.arrayBuffer()`** -- vrátí odpověď jako [ArrayBuffer](info:arraybuffer-binary-arrays) (nízkoúrovňová reprezentace binárních dat).

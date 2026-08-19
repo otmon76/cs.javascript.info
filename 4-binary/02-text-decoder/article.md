@@ -6,23 +6,23 @@ Vestavěný objekt [TextDecoder](https://encoding.spec.whatwg.org/#interface-tex
 
 Nejprve jej musíme vytvořit:
 ```js
-let dekodér = new TextDecoder([kódování], [možnosti]);
+let dekodér = new TextDecoder([kódování], [volby]);
 ```
 
 - **`kódování`** -- kódování, standardně `utf-8`, ale podporována jsou i `big5`, `windows-1251` a mnoho dalších.
-- **`možnosti`** -- nepovinný objekt:
+- **`volby`** -- nepovinný objekt:
   - **`fatal`** -- booleovská hodnota, pokud je `true`, pak se pro neplatné (nerozkódovatelné) znaky vyhodí výjimka, jinak (standardně) budou nahrazeny znakem `\uFFFD`.
   - **`ignoreBOM`** -- booleovská hodnota, pokud je `true`, pak se ignoruje BOM (nepovinný znak pořadí bytů v Unicode), je potřeba jen zřídka.
 
 ...A pak dekódujeme:
 
 ```js
-let řetězec = dekodér.decode([vstup], [možnosti]);
+let řetězec = dekodér.decode([vstup], [volby]);
 ```
 
 - **`vstup`** -- `BufferSource` k dekódování.
-- **`možnosti`** -- nepovinný objekt:
-  - **`stream`** -- `true` při dekódování proudů, kdy je `dekodér` volán opakovaně pro přicházející bloky dat. V takovém případě může být znak, zakódovaný ve více bytech, občas rozdělen mezi jednotlivé bloky. Tato možnost říká, aby si `TextDecoder` pamatoval „nedokončené“ znaky a dekódoval je, až přijde další blok.
+- **`volby`** -- nepovinný objekt:
+  - **`stream`** -- `true` při dekódování proudů, kdy je `dekodér` volán opakovaně pro přicházející bloky dat. V takovém případě může být znak, zakódovaný ve více bytech, občas rozdělen mezi jednotlivé bloky. Tato volba říká, že si `TextDecoder` má pamatovat „nedokončené“ znaky a dekódovat je, až přijde další blok.
 
 Příklad:
 

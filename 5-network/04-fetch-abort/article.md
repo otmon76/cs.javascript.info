@@ -5,7 +5,7 @@ Jak víme, metoda `fetch` vrací příslib. A JavaScript obecně nemá žádný 
 
 K tomuto účelu slouží speciální zabudovaný objekt: `AbortController`. Můžeme jej použít nejen k zastavení `fetch`, ale i jiných asynchronních úloh.
 
-Jeho použití je velmi přímé:
+Jeho použití je velmi přímočaré:
 
 ## Objekt AbortController
 
@@ -46,7 +46,7 @@ controller.abort(); // zastaveno!
 alert(signal.aborted); // true
 ```
 
-Jak vidíme, `AbortController` je jen způsob, jak předávat události `abort`, když je na něm volán `abort()`.
+Jak vidíme, `AbortController` je jen způsob, jak předávat událost `abort`, když je na něm volán `abort()`.
 
 Stejný způsob naslouchání událostem si můžeme v našem kódu implementovat i sami, bez objektu `AbortController`.
 

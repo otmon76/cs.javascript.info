@@ -11,11 +11,11 @@ V prohlížeči jsou i další objekty vyšší úrovně, popsané ve specifikac
 Syntaxe konstruktoru je:
 
 ```js
-new Blob(blobParts, možnosti);
+new Blob(blobParts, volby);
 ```
 
 - **`blobParts`** je pole hodnot `Blob`/`BufferSource`/`String`.
-- **`možnosti`** je nepovinný objekt:
+- **`volby`** je nepovinný objekt:
   - **`type`** -- typ blobu, zpravidla MIME typ, např. `image/png`,
   - **`endings`** -- zda převádět znaky konce řádku v `Blob` tak, aby odpovídaly koncům řádků v aktuálním OS (`\r\n` nebo `\n`). Standardně `"transparent"` (nedělá nic), ale může být i `"native"` (převádí).
 

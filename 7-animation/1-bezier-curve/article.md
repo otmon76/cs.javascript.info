@@ -61,7 +61,7 @@ Nejprve se podívejme na 3-bodový příklad.
 
 Zde je ukázka a vysvětlení bude následovat.
 
-Řídící body (1, 2 a 3) můžete posunovat myší. Stisknutím tlačítka „Přehrát“ jej spustíte.
+Řídící body (1, 2 a 3) můžete posunovat myší. Stisknutím tlačítka „Přehrát“ spustíte ukázku.
 
 [iframe src="demo.svg?p=0,0,0.5,1,1,0&animate=1" height=370]
 
@@ -114,7 +114,7 @@ Máme-li zadaných N řídících bodů:
 Tyto body tvoří křivku.
 
 ```online
-**Spouštějte a zastavujte příklady, abyste jasně viděli úsečky a způsob, jakým se křivka vytváří.**
+**Když budete spouštět a zastavovat příklady, jasně uvidíte úsečky a způsob, jakým se křivka vytváří.**
 ```
 
 
@@ -126,7 +126,7 @@ Pěkně fungují i řídící body umístěné na přeskáčku:
 
 [iframe src="demo.svg?p=0,0,1,0.5,0,0.5,1,1&animate=1" height=370]
 
-Můžeme i vytvořit smyčku:
+Můžeme vytvořit i smyčku:
 
 [iframe src="demo.svg?p=0,0,1,0.5,0,1,0.5,0&animate=1" height=370]
 

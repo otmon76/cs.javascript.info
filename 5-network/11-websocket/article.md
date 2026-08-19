@@ -88,7 +88,7 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
-- `Origin` -- původ klientské stránky, např. `https://javascript.info`. Objekty WebSocketu jsou ze své povahy jiného původu. Nejsou zde žádné speciální hlavičky ani jiná omezení. Staré servery stejně nedokážou WebSocket zpracovávat, takže problémy s kompatibilitou se nevyskytnou. Důležitá je však hlavička `Origin`, která umožňuje serveru rozhodnout se, zda bude s tímto webovým sídlem komunikovat WebSocketem nebo ne.
+- `Origin` -- původ klientské stránky, např. `https://javascript.info`. Objekty WebSocketu jsou ze své povahy jiného původu. Nejsou zde žádné speciální hlavičky ani jiná omezení. Staré servery stejně nedokáží WebSocket zpracovávat, takže problémy s kompatibilitou se nevyskytnou. Důležitá je však hlavička `Origin`, která umožňuje serveru rozhodnout se, zda bude s tímto webovým sídlem komunikovat WebSocketem nebo ne.
 - `Connection: Upgrade` -- signalizuje, že klient chce změnit protokol.
 - `Upgrade: websocket` -- požadovaný protokol je „websocket“.
 - `Sec-WebSocket-Key` -- náhodný klíč generovaný prohlížečem, používaný k ujištění, že server podporuje protokol WebSocket. Je náhodný, aby si proxy servery následnou komunikaci neukládaly do mezipaměti.
@@ -121,7 +121,7 @@ Například:
 
 - `Sec-WebSocket-Protocol: soap, wamp` znamená, že nechceme posílat jen tak nějaká data, ale data v protokolech [SOAP](https://cs.wikipedia.org/wiki/SOAP) nebo WAMP („The WebSocket Application Messaging Protocol“ -- Websocketový protokol pro zprávy aplikací). Subprotokoly WebSocketu jsou registrovány v [katalogu IANA](https://www.iana.org/assignments/websocket/websocket.xml). Tato hlavička tedy popisuje formáty dat, které se chystáme použít.
 
-    Tato nepovinná hlavička se nastavuje druhým parametrem `new WebSocket`. Ten obsahuje pole subprotokolů, např. když chceme použít SOAP nebo WAMP:
+    Tato nepovinná hlavička se nastavuje druhým parametrem konstruktoru `new WebSocket`, který obsahuje pole subprotokolů, např. když chceme použít SOAP nebo WAMP:
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
@@ -175,7 +175,7 @@ V prohlížeči přímo pracujeme jen s textovými a binárními rámci.
 
 Volání `socket.send(tělo)` umožňuje, aby `tělo` byl řetězec nebo binární formát, např. `Blob`, `ArrayBuffer` atd. Není třeba nic nastavovat: prostě pošle data v jakémkoli formátu.
 
-**Když přijímáme data, text přichází vždy jako řetězec. U binárních dat si můžeme vybrat mezi formáty `Blob` a `ArrayBuffer`.**
+**Když přijímáme data, textová data přicházejí vždy jako řetězec. U binárních dat si můžeme vybrat mezi formáty `Blob` a `ArrayBuffer`.**
 
 To se nastavuje vlastností `socket.binaryType`. Standardně je `"blob"`, takže binární data přicházejí jako objekty `Blob`.
 
@@ -333,7 +333,7 @@ const klienti = new Set();
 
 http.createServer((požadavek, odpověď) => {
   // zde zpracováváme jen websocketová spojení
-  // ve skutečném projektu bychom zde měli i jiný kód, který by zpracoval jiné než websocketové požadavky
+  // ve skutečném projektu bychom zde měli i jiný kód, který by zpracovával jiné než websocketové požadavky
   wss.handleUpgrade(požadavek, požadavek.socket, Buffer.alloc(0), onSocketConnect);
 });
 

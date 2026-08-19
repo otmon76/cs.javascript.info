@@ -106,7 +106,7 @@ Výsledek se nazývá „zploštělý“ (flattened) DOM:
 To si můžeme snadno zkontrolovat, jestliže spustíme `querySelectorAll`: uzly budou stále na svých místech.
 
 ```js
-// <span> uzly světlého DOMu jsou stále na stejných místech, pod `<karta-uzivatele>`
+// uzly <span> světlého DOMu jsou stále na stejných místech, pod `<karta-uzivatele>`
 alert( document.querySelectorAll('karta-uzivatele span').length ); // 2
 ```
 
@@ -143,7 +143,7 @@ vydá následující zploštělý DOM se dvěma elementy ve `<slot name="uživat
 ```html
 <karta-uzivatele>
   #shadow-root
-    <div>Name:
+    <div>Jméno:
       <slot name="uživatel">
         <span slot="uživatel">Jan</span>
         <span slot="uživatel">Novák</span>
@@ -385,7 +385,7 @@ Jak jsme již viděli, JavaScript se dívá na „skutečný“, nezploštělý 
 
 - `uzel.assignedSlot` -- vrátí element `<slot>`, do něhož je přiřazen `uzel`.
 - `slot.assignedNodes({flatten: true/false})` -- DOM uzly, přiřazené do slotu. Volba `flatten` je standardně `false`. Pokud je výslovně nastavena na `true`, metoda se podívá hlouběji do zploštělého DOMu, v případě vnořených komponent vrátí vnořené sloty a není-li žádný uzel přiřazen, vrátí záložní obsah.
-- `slot.assignedElements({flatten: true/false})` -- DOM elementy přiřazené do slotu (totéž jako předchozí, ale jen elementové uzly).
+- `slot.assignedElements({flatten: true/false})` -- DOM elementy přiřazené do slotu (totéž jako předchozí metoda, ale jen elementové uzly).
 
 Tyto metody jsou užitečné, když chceme obsah vložený do slotů nejen zobrazovat, ale i zpracovávat v JavaScriptu.
 
@@ -441,7 +441,7 @@ Sloty se dělí do dvou druhů:
 - Pokud pro stejný slot existuje více elementů, budou vloženy jeden za druhým.
 - Obsah elementu `<slot>` se používá jako záloha. Zobrazí se, jestliže pro tento slot nejsou ve světlém DOMu žádné děti.
 
-Proces vykreslování elementů ve slotech uvnitř jejich slotů se nazývá „kompozice“. Výsledek se nazývá „zploštělý DOM“.
+Proces vykreslování elementů uvnitř jejich slotů se nazývá „kompozice“. Výsledek se nazývá „zploštělý DOM“.
 
 Kompozice ve skutečnosti nepřesunuje uzly, z pohledu JavaScriptu je DOM stále stejný.
 

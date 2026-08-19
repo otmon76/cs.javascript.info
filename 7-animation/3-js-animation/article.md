@@ -168,7 +168,7 @@ Funkce `animace` přijímá 3 parametry, které v zásadě popisují celou anima
 `vykreslení(postup)`
 : Funkce, která obdrží stav dokončení animace a vykreslí jej. Hodnota `postup=0` popisuje počáteční stav animace, `postup=1` koncový stav.
 
-    Je to funkce, která zajistí skutečné vykreslení animace.
+    Tato funkce zajistí skutečné vykreslení animace.
 
     Může přesunovat element:
     ```js

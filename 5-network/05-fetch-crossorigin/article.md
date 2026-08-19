@@ -95,7 +95,7 @@ To funguje a neporušuje to bezpečnost, protože obě strany souhlasily, že si
 
 Po nějaké době se v prohlížečovém JavaScriptu objevily síťové metody.
 
-Požadavky jiného původu byly nejdříve zakázány. Po dlouhých diskusích však byly nakonec povoleny, ale s novými schopnostmi, které vyžadují výslovné povolení od serveru, uvedené ve speciálních hlavičkách.
+Požadavky jiného původu byly nejdříve zakázány. Po dlouhých diskusích však byly nakonec povoleny, ale s tím, že nové schopnosti vyžadují výslovné povolení od serveru, uvedené ve speciálních hlavičkách.
 
 ## Bezpečné požadavky
 
@@ -121,7 +121,7 @@ Jakýkoli jiný požadavek se považuje za „nebezpečný“. Například poža
 
 I velmi starý server by tedy měl být připraven přijmout bezpečný požadavek.
 
-Naproti tomu požadavky s nestandardními hlavičkami nebo např. metodou `DELETE` nemohou být vytvořeny tímto způsobem. Dlouhou dobu JavaScript nedokázal takové požadavky vytvářet. Starší server tedy může předpokládat, že takové požadavky přicházejí z privilegovaného zdroje, „protože webová stránka je není schopna posílat“.
+Naproti tomu požadavky s nestandardními hlavičkami nebo např. s metodou `DELETE` nemohou být vytvořeny tímto způsobem. JavaScript dlouho nedokázal takové požadavky vytvářet. Starší server tedy může předpokládat, že takové požadavky přicházejí z privilegovaného zdroje, „protože webová stránka je není schopna posílat“.
 
 Když se pokoušíme vytvořit nebezpečný požadavek, prohlížeč pošle speciální „předběžný“ („preflight“) požadavek, který se zeptá serveru: souhlasíš s přijetím takového požadavku jiného původu, nebo ne?
 
@@ -282,7 +282,7 @@ Pokud je uvedena hlavička `Access-Control-Max-Age` s časem v sekundách, pak s
 
 ### Krok 3 (skutečný požadavek)
 
-Když je předběžný požadavek úspěšný, prohlížeč vytvoří hlavní požadavek. Proces je zde stejný jako u bezpečných požadavků.
+Když je předběžný požadavek úspěšný, prohlížeč vytvoří hlavní požadavek. Je to stejný proces jako u bezpečných požadavků.
 
 Hlavní požadavek obsahuje hlavičku `Origin` (protože je jiného původu):
 
@@ -344,7 +344,7 @@ Access-Control-Allow-Origin: https://javascript.info
 Access-Control-Allow-Credentials: true
 ```
 
-Prosíme všimněte si, že `Access-Control-Allow-Origin` nesmí u požadavků s přihlašovacími údaji obsahovat hvězdičku `*`. Jak je zde vidět, musí tentokrát poskytnout přesný původ. To je další bezpečnostní opatření, které zajistí, že server opravdu ví, komu důvěřuje natolik, aby mu povolil takové požadavky.
+Prosíme všimněte si, že `Access-Control-Allow-Origin` nesmí u požadavků s přihlašovacími údaji obsahovat hvězdičku `*`. Jak zde vidíme, musí tentokrát poskytnout přesný původ. To je další bezpečnostní opatření, které zajistí, že server opravdu ví, komu důvěřuje natolik, aby mu povolil takové požadavky.
 
 ## Shrnutí
 

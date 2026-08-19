@@ -7,7 +7,7 @@ Nyní řekněme, že potřebujeme nejen kruh, ale také zobrazit v něm zprávu.
 
 V řešení předchozí úlohy funkce `zobrazKruh(cx, cy, poloměr)` zobrazila kruh, ale neumožnila nijak zjistit, zda je kruh připraven.
 
-Přidejte argument s callbackem: `zobrazKruh(cx, cy, poloměr, callback)`, který se bude volat, až bude animace dokončena. Tento `callback` by měl přijímat `<div>` s kruhem jako argument.
+Přidejte argument s callbackem: `zobrazKruh(cx, cy, poloměr, callback)`, který se bude volat, až bude animace dokončena. Tento `callback` by měl jako argument přijímat `<div>` s kruhem.
 
 Příklad:
 

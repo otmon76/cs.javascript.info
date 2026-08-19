@@ -1,6 +1,6 @@
 # Nastavení stylů stínového DOMu
 
-Stínový DOM může obsahovat značky `<style>` i `<link rel="stylesheet" href="…">`. Ve druhém případě se styly ukládají do HTTP cache, takže se pro další komponenty používající stejnou šablonu nebudou znovu stahovat.
+Stínový DOM může obsahovat značky `<style>` i `<link rel="stylesheet" href="…">`. Ve druhém případě se styly ukládají do HTTP mezipaměti, takže se pro další komponenty používající stejnou šablonu nebudou znovu stahovat.
 
 Platí obecné pravidlo, že lokální styly fungují jedině uvnitř stínového stromu a dokumentové styly mimo něj. Existuje však několik výjimek.
 
@@ -110,7 +110,7 @@ customElements.define('vlastni-dialog', class extends HTMLElement {
 
 Nyní se přidané centrovací styly aplikují jen na první dialog: `<vlastni-dialog centrovan   >`.
 
-Když to shrneme, pro nastavení stylů hlavního elementu komponenty můžeme použít `:host`-rodinu selektorů. Tyto styly (pokud nemají `!important`) mohou být přepsány v dokumentu.
+Když to shrneme, pro nastavení stylů hlavního elementu komponenty můžeme použít rodinu selektorů `:host`. Tyto styly (pokud nemají `!important`) mohou být v dokumentu přepsány.
 
 ## Nastavení stylů obsahu ve slotu
 
@@ -228,7 +228,7 @@ Jak můžeme nastavit styl vnitřních elementů komponenty z hlavního dokument
 
 Selektory jako `:host` aplikují pravidla na element `<vlastni-dialog>` nebo `<karta-uzivatele>`, ale jak nastavit styly elementů stínového DOMu uvnitř nich?
 
-Neexistuje žádný selektor, který by působil z dokumentu přímo na styly stínového DOMu. Avšak stejně jako vystavujeme metody, pomocí nichž lze interagovat s naší komponentou, můžeme vystavit CSS proměnné (volitelné CSS vlastnosti), aby jí bylo možné nastavit styly.
+Neexistuje žádný selektor, který by působil z dokumentu přímo na styly stínového DOMu. Avšak stejně jako zveřejňujeme metody, pomocí nichž lze interagovat s naší komponentou, můžeme zveřejnit CSS proměnné (volitelné CSS vlastnosti), aby jí bylo možné nastavit styly.
 
 **Volitelné CSS vlastnosti existují na všech úrovních, ve světlém i ve stínovém DOMu.**
 
@@ -253,7 +253,7 @@ karta-uzivatele {
 }
 ```
 
-Volitelné CSS vlastnosti se propalují až do stínového DOMu a jsou viditelné všude, takže vnitřní pravidlo `.pole` je bude využívat.
+Volitelné CSS vlastnosti pronikají až do stínového DOMu a jsou viditelné všude, takže vnitřní pravidlo `.pole` je bude využívat.
 
 Zde je celý příklad:
 
@@ -310,7 +310,7 @@ Dokumentové styly mohou ovlivňovat:
 
 Když se CSS vlastnosti dostanou do konfliktu, mají přednost styly z dokumentu, pokud vlastnost není označena jako `!important`. Pak mají přednost lokální styly.
 
-Volitelné CSS vlastnosti se propalují do stínového DOMu. Používají se jako „háky“, kterými lze nastavit styly komponenty:
+Volitelné CSS vlastnosti pronikají do stínového DOMu. Používají se jako „háky“, kterými lze nastavit styly komponenty:
 
 1. Komponenta používá volitelnou CSS vlastnost k nastavení stylů klíčových elementů, například `var(--titulek-nazvu-komponenty, <standardní hodnota>)`.
 2. Autor komponenty publikuje tyto vlastnosti pro vývojáře. Jsou stejně důležité jako ostatní veřejné metody komponenty.

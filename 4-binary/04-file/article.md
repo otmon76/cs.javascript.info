@@ -7,12 +7,12 @@ Je možné ho získat dvěma způsoby.
 Prvním je konstruktor, podobně jako `Blob`:
 
 ```js
-new File(částiSouboru, názevSouboru, [možnosti])
+new File(částiSouboru, názevSouboru, [volby])
 ```
 
 - **`částiSouboru`** -- je pole hodnot Blob/BufferSource/String.
 - **`názevSouboru`** -- řetězec s názvem souboru.
-- **`možnosti`** -- nepovinný objekt:
+- **`volby`** -- nepovinný objekt:
     - **`lastModified`** -- časové razítko (celočíselné datum) poslední změny.
 
 Druhým, častějším způsobem je získání souboru z `<input type="file">`, přetažení nebo jiného prohlížečového rozhraní. V takovém případě soubor získá tyto informace z operačního systému.

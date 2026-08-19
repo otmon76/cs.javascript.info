@@ -62,9 +62,9 @@ Komponenta má:
 - CSS styly, aplikované na komponentu.
 - API: události, třídní metody atd., k interakci s ostatními komponentami.
 
-Opakujeme, že celá „komponentová“ záležitost není nic zvláštního.
+Opakujeme, že celý „komponentový“ přístup není nic zvláštního.
 
-Pro jejich vytváření existuje řada frameworků a vývojových metodik, každá má své vlastní speciality. K vytváření „komponentového dojmu“ se zpravidla používají speciální CSS třídy a konvence -- rozsah platnosti CSS a zapouzdření DOMu.
+Pro vytváření komponent existuje řada frameworků a vývojových metodik, každá má své vlastní speciality. K vytváření „komponentového dojmu“ se zpravidla používají speciální CSS třídy a konvence -- rozsah platnosti CSS a zapouzdření DOMu.
 
 „Webové komponenty“ k tomu poskytují zabudované prohlížečové schopnosti, takže je už nebudeme muset emulovat.
 
@@ -73,4 +73,4 @@ Pro jejich vytváření existuje řada frameworků a vývojových metodik, každ
 - [Rozsah platnosti CSS](https://drafts.csswg.org/css-scoping/) -- k deklaraci stylů, které se aplikují pouze uvnitř stínového DOMu komponenty.
 - [Přesměrování událostí](https://dom.spec.whatwg.org/#retarget) a další méně důležité záležitosti, aby bylo možné vlastní komponenty lépe vyvíjet.
 
-V příští kapitole podrobně probereme „vlastní elementy“ -- základní a hojně podporovanou vlastnost webových komponent, která je dobrá sama o sobě.
+V příští kapitole podrobně probereme „vlastní elementy“ -- základní a hojně podporovaný prvek webových komponent, který je dobrý sám o sobě.

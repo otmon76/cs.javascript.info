@@ -122,9 +122,9 @@ fetch('https://another.com/page', {
 });
 ```
 
-Můžeme to umístit do všech volání `fetch` nebo možná integrovat do JavaScriptové knihovny našeho projektu, která provádí všechny požadavky, a použít `fetch` v ní.
+Můžeme to umístit do všech volání `fetch` nebo třeba integrovat do JavaScriptové knihovny našeho projektu, která provádí všechny požadavky, a použít `fetch` v ní.
 
-Jediný rozdíl oproti standardnímu chování spočívá v tom, že na požadavky jiného původu `fetch` posílá jen část URL obsahující původ (např. `https://javascript.info` bez cesty). Pro požadavky na náš původ budeme stále mít úplný `Referer` (což může být užitečné pro účely ladění).
+Jediný rozdíl oproti standardnímu chování spočívá v tom, že na požadavky jiného původu `fetch` posílá jen částečnou URL obsahující jen původ (např. `https://javascript.info` bez cesty). Pro požadavky na náš původ budeme stále mít úplný `Referer` (což může být užitečné pro účely ladění).
 
 ```smart header="Politika refereru není jen pro `fetch`"
 Politika refereru, popsaná ve [specifikaci](https://w3c.github.io/webappsec-referrer-policy/), neslouží jen pro metodu `fetch`, ale je globálnější.

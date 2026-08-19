@@ -1,6 +1,6 @@
 # CSS animace
 
-CSS animace umožňují vytvářet jednoduché animace zcela bez JavaScriptu.
+CSS umožňuje vytvářet jednoduché animace zcela bez JavaScriptu.
 
 V JavaScriptu můžeme CSS animace řídit nebo je vylepšit krátkým kódem.
 
@@ -19,7 +19,7 @@ Například následující CSS animace mění vlastnost `background-color` běhe
 }
 ```
 
-Když nyní má nějaký element třídu `.animováno`, každá změna jeho `background-color` bude animována během 3 sekund.
+Když nyní má nějaký element třídu `.animováno`, každá změna jeho `background-color` bude animována v průběhu 3 sekund.
 
 Kliknutím na následující tlačítko spustíte animaci jeho pozadí:
 
@@ -47,7 +47,7 @@ K popisu CSS přechodů slouží 4 vlastnosti:
 - `transition-timing-function`
 - `transition-delay`
 
-Probereme je za okamžik. Prozatím poznamenejme, že společná vlastnost `transition` je umožňuje deklarovat všechny najednou v pořadí: `property duration timing-function delay`, stejně jako animovat více vlastností současně.
+Probereme je za okamžik. Prozatím poznamenejme, že společná vlastnost `transition` umožňuje deklarovat všechny najednou v pořadí: `property duration timing-function delay`, stejně jako animovat více vlastností současně.
 
 Například toto tlačítko animuje vlastnosti `color` a `font-size`:
 
@@ -156,7 +156,7 @@ Tato křivka vypadá následovně:
 
 ![](bezier-linear.svg)
 
-...Jak vidíte, je to obyčejná přímka. Když probíhá čas (`x`), dokončení animace (`y`) rovnoměrně pokračuje od `0` k `1`.
+...Jak vidíte, je to obyčejná přímka. Když probíhá čas (`x`), proces animace (`y`) rovnoměrně pokračuje od `0` k `1`.
 
 V následujícím příkladu jede vláček zleva doprava stálou rychlostí (klikněte na něj):
 
@@ -282,7 +282,7 @@ V HTML je pás číslic uzavřen do `<div id="číslice">` pevné délky:
 </div>
 ```
 
-Div `#digit` má pevnou šířku a ohraničení, proto vypadá jako červené okno.
+Element `#digit` má pevnou šířku a ohraničení, proto vypadá jako červené okno.
 
 Vytvoříme časovač: číslice se budou objevovat nespojitě jedna po druhé.
 
@@ -297,7 +297,7 @@ Bude to mít 9 kroků, pro každou číslici jeden krok-posun:
 }
 ```
 
-První argument funkce `steps(9, start)` je počet kroků. Přechod bude rozdělen na 9 částí (každá 10%). Časový interval je rovněž automaticky rozdělen na 9 částí, takže `transition: 9s` nám dává 9 sekund na celou animaci -- 1 sekundu na každou číslici.
+První argument funkce `steps(9, start)` je počet kroků. Přechod bude rozdělen na 9 částí (každá 10%). Časový interval se rovněž automaticky rozdělí na 9 částí, takže `transition: 9s` nám dává 9 sekund na celou animaci -- 1 sekundu na každou číslici.
 
 Druhý argument je jedno ze dvou slov: `start` nebo `end`.
 
@@ -461,9 +461,9 @@ Naštěstí je vlastnost `transform` velmi silná. Používáním `transform` na
 
 Rovněž vlastnost `opacity` nikdy nespustí rozložení (v Mozille Gecku přeskakuje i kreslení). Můžeme ji používat pro efekty zobrazení/skrytí nebo zjevování/mizení.
 
-Spojení `transform` a `opacity` nám obvykle může vyřešit většinu našich potřeb a poskytnout plynulé, pěkně vypadající animace.
+Spojení `transform` a `opacity` nám obvykle dokáže vyřešit většinu našich potřeb a poskytnout plynulé, pěkně vypadající animace.
 
-Například zde kliknutím na element `#loď` přidáte třídu s `transform: translateX(300px)` a `opacity: 0`, což ji přiměje přesunout se o `300px` doprava a zmizet:
+Například zde kliknutím na element `#loď` přidáte třídu s `transform: translateX(300px)` a `opacity: 0`, což přiměje loď přesunout se o `300px` doprava a zmizet:
 
 ```html run height=260 autorun no-beautify
 <img src="https://js.cx/clipart/boat.png" id="loď">

@@ -33,7 +33,7 @@ document.onclick =
 Jestliže na tlačítko kliknete, zobrazí se zprávy:
 
 1. Vnitřní cíl: `BUTTON` -- vnitřní handler události obdrží správný cíl, element uvnitř stínového DOMu.
-2. Vnější cíl: `USER-CARD` -- dokumentový handler události obdrží jako cíl stínového hostitele.
+2. Vnější cíl: `KARTA-UZIVATELE` -- dokumentový handler události obdrží jako cíl stínového hostitele.
 
 Přesměrování událostí je skvělá věc, protože vnější dokument nemusí vědět nic o vnitřku komponenty. Z jeho pohledu se událost stala na elementu `<karta-uzivatele>`.
 
@@ -77,7 +77,7 @@ Máme-li tedy element ve slotu a někde uvnitř něj nastane událost, tato udá
 
 Celou cestu k původnímu cíli události se všemi stínovými elementy je možné získat voláním `událost.composedPath()`. Jak vidíme z názvu metody, je vrácena cesta po kompozici.
 
-V uvedeném příkladu je zploštělý DOM následující:
+V uvedeném příkladu vypadá zploštělý DOM následovně:
 
 ```html
 <karta-uzivatele id="kartaUživatele">
@@ -127,7 +127,7 @@ Tyto události je možné zachytit jedině na elementech uvnitř stejného DOMu,
 
 ## Vlastní události
 
-Když vytváříme vlastní události, musíme jim nastavit obě vlastnosti `bubbles` a `composed` na `true`, aby vybublaly výš a ven z komponenty.
+Když vytváříme vlastní události a chceme, aby vybublaly výš a ven z komponenty, musíme jim nastavit obě vlastnosti `bubbles` a `composed` na `true`.
 
 Například zde vytvoříme `div#vnitřní` ve stínovém DOMu elementu `div#vnější` a spustíme na něm dvě události. Ven z dokumentu se dostane pouze ta, která má `composed: true`:
 
@@ -188,4 +188,4 @@ Tyto události můžeme zachytit jedině na elementech uvnitř stejného DOMu.
 
 Pokud vytváříme `CustomEvent`, měli bychom výslovně nastavit `composed: true`.
 
-Prosíme všimněte si, že v případě vnořených komponent může být jeden stínový DOM vnořen do druhého. V tom případě události s `composed` bublají skrz hranice všech stínových DOMů. Pokud tedy je událost určena jen pro bezprostředně uzavírající komponentu, můžeme ji ve stínovém hostiteli ošetřit a nastavit `composed: false`. Pak se dostane ven ze stínového DOMu komponenty, ale neprobublá do DOMu vyšší úrovně.
+Prosíme všimněte si, že v případě vnořených komponent může být jeden stínový DOM vnořen do druhého. V tom případě události s nastaveným `composed` bublají skrz hranice všech stínových DOMů. Pokud tedy je událost určena jen pro bezprostředně uzavírající komponentu, můžeme ji ve stínovém hostiteli ošetřit a nastavit `composed: false`. Pak se dostane ven ze stínového DOMu komponenty, ale neprobublá do DOMu vyšší úrovně.

@@ -7,8 +7,8 @@ libs:
 
 IndexedDB je databáze zabudovaná do prohlížeče. Je mnohem silnější než `localStorage`.
 
-- Umožňuje ukládat téměř jakýkoli druh hodnot podle klíčů, typů klíčů je více.
-- Podporuje transakce kvůli spolehlivosti.
+- Umožňuje ukládat téměř jakýkoli druh hodnot podle klíčů, klíče mohou být několika typů.
+- Podporuje transakce pro dosažení větší spolehlivosti.
 - Podporuje dotazy podle rozsahu klíčů a indexy.
 - Dokáže ukládat mnohem větší objemy dat než `localStorage`.
 
@@ -109,9 +109,9 @@ let požadavekSmazání = indexedDB.deleteDatabase(název)
 ```warn header="Nemůžeme otevřít databázi voláním open se starší verzí"
 Jestliže aktuální uživatelova databáze má vyšší verzi, než je ve volání `open`, např. verze existující databáze je `3` a my se pokusíme otevřít `open(...2)`, pak nastane chyba a spustí se `požadavekOtevření.onerror`.
 
-Stává se to vzácně, ale může se to stát, když si návštěvník načte zastaralý JavaScriptový kód, např. z proxy cache. Kód je tedy starý, ale jeho databáze je nová.
+Stává se to vzácně, ale může se to stát, když si návštěvník načte zastaralý JavaScriptový kód, např. z mezipaměti v proxy. Kód je tedy starý, ale uživatelova databáze je nová.
 
-Abychom se před takovými chybami chránili, měli bychom kontrolovat `db.version` a navrhovat aktualizaci stránky. Abyste se vyhnuli načtení starého kódu, používejte vhodné HTTP cachovací hlavičky. Pak nikdy nebudete mít takové problémy.
+Abychom se před takovými chybami chránili, měli bychom kontrolovat `db.version` a navrhovat aktualizaci stránky. Abyste se vyhnuli načtení starého kódu, používejte vhodné HTTP hlavičky pro mezipaměť. Pak takové problémy nikdy mít nebudete.
 ```
 
 ### Problém paralelní aktualizace
@@ -125,7 +125,7 @@ Dejme tomu:
 
 Bude tedy mít záložku s otevřeným připojením k databázi verze `1`, zatímco druhá se ji pokusí ve svém handleru `upgradeneeded` aktualizovat na verzi `2`.
 
-Problém je v tom, že databáze je sdílena mezi dvěma záložkami, protože obě mají stejné sídlo, stejný původ. A nemůže být současně v obou verzích `1` a `2`. Abychom mohli provést aktualizaci na verzi `2`, musejí být zavřena všechna připojení k verzi 1, včetně připojení v první záložce.
+Problém je v tom, že databáze je sdílena mezi dvěma záložkami, protože obě mají stejné sídlo, stejný původ. A nemůže být současně v obou verzích `1` a `2`. Abychom mohli provést aktualizaci na verzi `2`, musejí být zavřena všechna připojení k verzi `1`, včetně připojení v první záložce.
 
 Abychom to mohli zorganizovat, spustí se na „zastaralém“ databázovém objektu událost `versionchange`. Měli bychom jí naslouchat a připojení ke staré databázi zavřít (a pravděpodobně navrhnout uživateli aktualizaci stránky, aby si načetl aktualizovaný kód).
 
@@ -177,7 +177,7 @@ Tyto kolize aktualizací se stávají jen vzácně, ale měli bychom pro ně mí
 
 K ukládání čehokoli v IndexedDB potřebujeme *objektové úložiště*.
 
-Objektové úložiště je jádrem konceptu IndexedDB. Jeho obdoby v jiných databázích se nazývají „tabulky“ nebo „kolekce“. Je to místo, do něhož se ukládají data. Databáze může obsahovat více úložišť: jedno pro uživatele, druhé pro zboží atd.
+Objektové úložiště je jádrem konceptu IndexedDB. Jeho obdoby v jiných databázích se nazývají „tabulky“ nebo „kolekce“. Je to místo, do něhož se ukládají data. Databáze může obsahovat více úložišť: jedno pro uživatele, druhé pro zboží a tak dále.
 
 Přestože se úložiště nazývá „objektové“, můžeme do něj ukládat i primitivy.
 
@@ -220,7 +220,7 @@ db.createObjectStore('knihy', {keyPath: 'id'});
 
 **Objektové úložiště může být vytvořeno nebo měněno jen při aktualizaci verze databáze, v handleru `upgradeneeded`.**
 
-To je technické omezení. Mimo tento handler můžeme přidávat, odstraňovat a měnit data, ale objektová úložiště smíme vytvářet, odstraňovat a měnit jen při aktualizaci verze.
+To je technické omezení. Přidávat, odstraňovat a měnit data můžeme i mimo tento handler, ale objektová úložiště smíme vytvářet, odstraňovat a měnit jen při aktualizaci verze.
 
 Aktualizaci verze databáze je možné provést v zásadě dvěma způsoby:
 
@@ -336,15 +336,15 @@ Podobně jako při otevření databáze můžeme poslat požadavek: `knihy.add(k
 
 ## Automatické provádění transakcí
 
-V uvedeném příkladu jsme zahájili transakci a vytvořili požadavek `add`. Ale jak jsme již dříve uvedli, transakce může obsahovat více požadavků, které se musejí buď všechny úspěšně provést, nebo všechny neprovést. Jak označíme, že transakce je hotová a žádné další požadavky nepřijdou?
+V uvedeném příkladu jsme zahájili transakci a vytvořili požadavek `add`. Ale jak jsme již dříve uvedli, transakce může obsahovat více požadavků, které se musejí buď všechny úspěšně provést, nebo všechny neprovést. Jak oznámíme, že transakce je hotová a žádné další požadavky nepřijdou?
 
-Krátká odpověď zní: nijak.
+Stručná odpověď zní: nijak.
 
 V další verzi specifikace 3.0 pravděpodobně bude způsob, jak ukončit transakci ručně, ale v současné verzi 2.0 neexistuje.
 
 **Až budou všechny požadavky na transakce hotovy a [fronta mikroúloh](info:microtask-queue) bude prázdná, transakce se automaticky provede.**
 
-Zpravidla můžeme předpokládat, že transakce se provede, až budou všechny její požadavky hotovy a běh aktuálního kódu skončí.
+Zpravidla můžeme předpokládat, že transakce se provede, až budou všechny její požadavky hotovy a průběh aktuálního kódu skončí.
 
 V uvedeném příkladu tedy není k dokončení transakce nutné žádné speciální volání.
 
@@ -467,7 +467,7 @@ požadavek.onerror = function(událost) {
   if (požadavek.error.name == "ConstraintError") {
     console.log("Kniha s tímto id již existuje"); // zpracování chyby
     událost.preventDefault(); // nezrušíme transakci
-    událost.stopPropagation(); // nenecháme chybu probublat výš, „sníme“ ji
+    událost.stopPropagation(); // nenecháme chybu probublat výš, „pohltíme“ ji
   } else {
     // neděláme nic
     // transakce bude zrušena
@@ -502,9 +502,9 @@ K provádění samotného hledání slouží následující metody. Přijímají
 
 - `store.get(dotaz)` -- hledá první hodnotu podle klíče nebo rozsahu.
 - `store.getAll([dotaz], [počet])` -- hledá všechny hodnoty, pokud je uveden `počet`, hledá jich jen uvedený počet.
-- `store.getKey(dotaz)` -- hledá první klíč, který odpovídá dotazu, tím je zpravidla rozsah.
-- `store.getAllKeys([dotaz], [počet])` -- hledá všechny klíče, které odpovídají dotazu, tím je zpravidla rozsah, pokud je uveden `počet`, hledá jich jen uvedený počet.
-- `store.počet([dotaz])` -- vrátí celkový počet klíčů, které odpovídají dotazu, tím je zpravidla rozsah.
+- `store.getKey(dotaz)` -- hledá první klíč, který odpovídá dotazu, dotazem je zpravidla rozsah.
+- `store.getAllKeys([dotaz], [počet])` -- hledá všechny klíče, které odpovídají dotazu, dotazem je zpravidla rozsah, pokud je uveden `počet`, hledá jich jen uvedený počet.
+- `store.počet([dotaz])` -- vrátí celkový počet klíčů, které odpovídají dotazu, dotazem je zpravidla rozsah.
 
 V našem úložišti máme například spoustu knih. Nezapomeňte, že klíčem je pole `id`, takže všechny tyto metody hledají podle `id`.
 
@@ -694,7 +694,7 @@ požadavek.onsuccess = function() {
 
 Hlavní metody kurzoru jsou:
 
-- `advance(počet)` -- posune kurzor `počet`-krát, přeskakuje hodnoty.
+- `advance(počet)` -- posune kurzor o `počet` kroků, přeskakuje hodnoty.
 - `continue([klíč])` -- při hledání podle rozsahu posune kurzor k další hodnotě (nebo hned za `klíč`, pokud je uveden).
 
 Ať existují další hodnoty odpovídající kurzoru nebo ne, je vyvolán `onsuccess` a z jeho `result` pak můžeme získat kurzor ukazující na další záznam nebo `undefined`.
@@ -791,7 +791,7 @@ await fetch(...); // (*)
 await inventář.add({ id: 'js', cena: 10, vytvořeno: new Date() }); // Chyba
 ```
 
-Příští `inventář.add` po `fetch` `(*)` spadne s chybou „neaktivní transakce“, protože transakce již v té chvíli byla provedena a uzavřena.
+Příští `inventář.add` po `fetch` `(*)` spadne s chybou „neaktivní transakce“, protože transakce již v tom okamžiku byla provedena a uzavřena.
 
 Způsob, jak to obejít, je stejný jako při práci s nativním IndexedDB: buď vytvořit novou transakci, nebo jen oddělit operace.
 

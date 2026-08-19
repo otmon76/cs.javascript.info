@@ -18,7 +18,7 @@ Proč by ho tedy někdo měl používat?
 
 Hlavním důvodem je, že je jednodušší. Pro mnoho aplikací je `WebSocket` příliš silný.
 
-Když potřebujeme přijímat tok dat ze serveru, třeba zprávy z chatu, ceny z trhu nebo cokoli jiného, hodí se k tomu `EventSource`. Navíc podporuje obnovu spojení, což při použití `WebSocket` musíme implementovat ručně. Kromě toho je to starý planý HTTP, není to nový protokol.
+Když potřebujeme přijímat tok dat ze serveru, třeba zprávy z chatu, ceny z burzy nebo cokoli jiného, hodí se k tomu `EventSource`. Navíc podporuje obnovu spojení, což při použití `WebSocket` musíme implementovat ručně. Kromě toho je to starý planý HTTP, není to nový protokol.
 
 ## Příjem zpráv
 
