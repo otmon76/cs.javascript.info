@@ -4,7 +4,7 @@ Uvažujme praktickou úlohu: máme telefonní číslo, například `"+7(903)-123
 
 Můžeme to udělat tak, že najdeme a odstraníme vše, co není číslice. Mohou nám s tím pomoci znakové třídy.
 
-*Znaková třída* je speciální zápis, kterému odpovídá každý symbol z určité množiny.
+*Znaková třída* je speciální zápis, kterému odpovídají všechny symboly z určité množiny.
 
 Na začátku vysvětlíme třídu „číslic“. Zapisuje se `pattern:\d` a odpovídá „jedné libovolné číslici“.
 
@@ -82,7 +82,7 @@ Ke každé znakové třídě existuje „inverzní třída“, označovaná stej
 : Nemezerový znak: jakýkoli znak kromě `pattern:\s`, například písmeno.
 
 `pattern:\W`
-: Neslovní znak: cokoli kromě `pattern:\w`, např. nelatinské písmeno nebo mezera.
+: Neslovní znak: cokoli kromě `pattern:\w`, například nelatinské písmeno nebo mezera.
 
 Na začátku kapitoly jsme viděli, jak z řetězce jako `subject:+7(903)-123-45-67` vytvořit telefonní číslo obsahující pouze číslice: najdeme všechny číslice a spojíme je.
 
@@ -120,7 +120,7 @@ alert( "CS-4".match(rv) ); // CS-4
 alert( "CS 4".match(rv) ); // CS 4 (mezera je také znak)
 ```
 
-Prosíme všimněte si, že tečka znamená „libovolný znak“, ale ne „nepřítomnost znaku“. Musí tam být znak, který jí bude odpovídat:
+Prosíme všimněte si, že tečka znamená „libovolný znak“, ale ne „žádný znak“. Musí tam být znak, který jí bude odpovídat:
 
 ```js run
 alert( "CS4".match(/CS.4/) ); // null, beze shody, protože pro tečku tam není žádný znak

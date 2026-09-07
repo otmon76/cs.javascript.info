@@ -16,7 +16,7 @@ Zde jsou hodnoty některých znaků v Unicode:
 
 Znaky jako `a` a `≈` tedy zabírají 2 byty, zatímco kódy pro `𝒳`, `𝒴` a `😄` jsou delší a mají 4 byty.
 
-Před delší dobou, když byl JavaScript vytvořen, bylo kódování Unicode jednodušší: neobsahovalo 4-bytové znaky. Některé prvky jazyka je tedy stále zpracovávají nesprávně.
+Před delší dobou, když JavaScript vznikl, bylo kódování Unicode jednodušší: neobsahovalo 4-bytové znaky. Některé prvky jazyka je tedy stále zpracovávají nesprávně.
 
 Například `length` si myslí, že to jsou dva znaky:
 
@@ -35,7 +35,7 @@ Na rozdíl od řetězců však regulární výrazy mají příznak `pattern:u`, 
 
 Každý znak v Unicode má mnoho vlastností. Ty popisují, do jaké „kategorie“ tento znak patří, a obsahují o něm různé informace.
 
-Například má-li znak vlastnost `Letter` (písmeno), znamená to, že patří do nějaké abecedy (jakéhokoli jazyka). A vlastnost `Number` (číslo) znamená, že to je číslice: může být arabská, čínská i jiná.
+Například pokud znak má vlastnost `Letter` (písmeno), znamená to, že patří do nějaké abecedy (jakéhokoli jazyka). A vlastnost `Number` (číslo) znamená, že to je číslice: může být arabská, čínská i jiná.
 
 Můžeme vyhledávat znaky s určitou vlastností pomocí zápisu `pattern:\p{…}`. Abychom mohli `pattern:\p{…}` použít, musí regulární výraz obsahovat příznak `pattern:u`.
 

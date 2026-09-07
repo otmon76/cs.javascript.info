@@ -1,6 +1,6 @@
 # Vzory a příznaky
 
-Regulární výrazy jsou vzory, které poskytují silný způsob, jak hledat a nahrazovat části textu.
+Regulární výrazy jsou vzory, které poskytují mocný způsob, jak hledat a nahrazovat části textu.
 
 V JavaScriptu jsou k dispozici pomocí objektu [RegExp](mdn:js/RegExp) a jsou také integrovány do metod řetězců.
 
