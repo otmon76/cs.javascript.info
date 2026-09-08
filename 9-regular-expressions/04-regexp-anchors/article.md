@@ -24,7 +24,7 @@ V těchto konkrétních případech bychom místo RV mohli použít řetězcové
 
 ## Testování úplné shody
 
-Obě kotvy dohromady `pattern:^...$` se často používají k otestování, zda celý řetězec odpovídá vzoru. Například pro zjištění, zda uživatelský vstup je ve správném formátu.
+Obě kotvy dohromady `pattern:^...$` se často používají k otestování, zda vzoru odpovídá celý řetězec. Například pro zjištění, zda uživatelský vstup je ve správném formátu.
 
 Prověřme, zda řetězcem je čas ve formátu `12:34`. Tedy: dvě číslice, pak dvojtečka a pak další dvě číslice.
 

@@ -79,7 +79,7 @@ alert("\d\.\d"); // d.d
 
 `new RegExp` tedy obdrží řetězec bez zpětných lomítek. Proto hledání nefunguje!
 
-Abychom to opravili, potřebujeme dvojí zpětná lomítka, protože řetězcové uvozovky změní `\\` na `\`:
+Abychom to opravili, potřebujeme dvojici zpětných lomítek, protože řetězcové uvozovky změní `\\` na `\`:
 
 ```js run
 *!*
